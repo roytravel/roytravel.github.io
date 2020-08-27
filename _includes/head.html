@@ -33,6 +33,11 @@
         {% assign url = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
     {% endif %}
 
+    
+    {% if page.use_math %}
+      {% include mathjax_support.html %}
+    {% endif %}
+
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}">
     {% if page.tags %}
