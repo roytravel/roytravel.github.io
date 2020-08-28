@@ -3,11 +3,10 @@ date: 2020-08-29
 layout: post
 title: 기억의 뇌과학
 subtitle: 기억과 창조의 본질:Mind Map
-description: >-
+description:
   
-image: >-
-  /assets/img/nerve-cell.jpg
-optimized_image: >-
+image: /assets/img/nerve-cell.jpg
+optimized_image:
   
 category: brain
 tags:

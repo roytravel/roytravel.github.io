@@ -3,12 +3,8 @@ date: 2020-08-27
 layout: post
 title: Oversampling and Undersampling
 subtitle: What is oversampling and undersampling and why use it?
-description: >-
-  
-image: >-
-  /assets/img/machine-learning-2.jpg
-optimized_image: >-
-  
+image: /assets/img/machine-learning-2.jpg
+ 
 category: ai
 tags:
   - machine-learning
