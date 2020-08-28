@@ -14,7 +14,7 @@ tags:
   - machine-learning
   - oversampling
   - undersampling
-author: roytravel
+author: Roytravel
 paginate: true
 use_math: true
 ---
