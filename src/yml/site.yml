@@ -1,13 +1,13 @@
-name: Jekflix
-title: Jekflix | A blog theme for Jekyll
-description: Jekflix is a template for Jekyll inspired by Netflix and made by Thiago Rossener.
+name: Roytravel
+title: Roytravel | A blog theme for Jekyll
+description: For world society.
 tags:
   - blog
   - template
   - jekyll
   - theme
   - netlify
-email: youremail@xyz.com
+email: roytravel97@gmail.com
 disqus_username: disqus_username
 show_hero: true
 menu:
