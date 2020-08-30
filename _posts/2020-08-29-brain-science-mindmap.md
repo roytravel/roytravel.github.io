@@ -15,7 +15,6 @@ tags:
   - 마인드맵
 author: Roytravel
 paginate: true
-use_math: true
 ---
 
 기억은 정보를 저장하는 것으로 학습과 필수불가결인 관계에 있다. 기억력을 높이기 위한 여러 방법이 존재하며 대표적으로 기억의 본질과 밀접한 <strong>마인드 맵</strong>에 대해 설명하고, 그 중요성을 이야기하고자 한다.
