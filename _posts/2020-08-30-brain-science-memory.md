@@ -18,7 +18,6 @@ tags:
   
 author: Roytravel
 paginate: true
-use_math: true
 ---
 
 이전 포스팅 : <a href="https://roytravel.github.io/brain-science-mindmap/">기억의 뇌과학(1)</a>
