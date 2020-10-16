@@ -41,11 +41,11 @@ paginate: true
 ## 최초의 계산 시스템
 ![VuePress 이미지](/assets/img/pascaline.jpg)*Pascaline*
 최초의 계산기라 불리는 시스템은 1642년에 파스칼이라는 학자가 고안한 것으로, 파스칼린이라는 이름의 계산기로 세금계산서에 나오는 덧셈과 뺄셈을 위해 만들어졌다. 이후 1672년경에 철학자인 라이츠니츠가 곱셈을 처리할 수 있는 계산기를 고안했고 1694년에 Stepped reckoner라는 이름으로 완성되었는데, 이러한 라이프니츠의 업적은 0과 1 혹은 On과 Off로 표시할 수 있는 이진법을 개발해 현대식 컴퓨터(디지털) 개발에 초석을 놓았다는점에 의미가 있다. 이후 1822년 찰스 배비지는 조금 더 현대적인 의미의 컴퓨터를 고안하였고, "차분기관"이라하여 명령들을 해석하며 계산을 실행하는 기계 즉, 프로그래밍 가능한 컴퓨터를 설계하고 제작을 시도하였다.
-![VuePress 이미지](/assets/img/stepped_reckoner.jpg)*Stpped reckoner*
+![VuePress 이미지](/assets/img/stepped_reckoner.jpg)*Stepped reckoner*
 
 ## 인공지능의 역사
 
-1943년 논리학자인 윌터 피츠와 신경와과의 워렌 맥컬럭이 "A Logical Calculus of Ideas Immanent In Nervous Activity"라는 논문에서 인간의 사고 메커니즘에 해당하는 뉴런의 작용을 0과 1로 이루어지는 이진법 논리 모델로 설명하였고 1946년 범용 컴퓨터인 '에니악(ENIAC)'의 등장 이후부터 컴퓨터 연구와 함께 인공지능에 대한 연구가 진행되었다.
+1943년 논리학자인 윌터 피츠와 신경과학자인 워렌 맥컬럭이 "A Logical Calculus of Ideas Immanent In Nervous Activity"라는 논문에서 인간의 사고 메커니즘에 해당하는 뉴런의 작용을 0과 1로 이루어지는 이진법 논리 모델로 설명하였고 1946년 범용 컴퓨터인 '에니악(ENIAC)'의 등장 이후부터 컴퓨터 연구와 함께 인공지능에 대한 연구가 진행되었다.
 
 
 ### 앨런튜링 - 인공지능의 개념적 토대를 놓다
