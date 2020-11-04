@@ -1,5 +1,5 @@
 ---
-date: 2020-10-15
+date: 2020-11-03
 layout: post
 title: Norm, Loss, Regularization
 subtitle: How to mitigate overfitting? - L1 & L2

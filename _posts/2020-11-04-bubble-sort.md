@@ -1,5 +1,5 @@
 ---
-date: 2020-10-15
+date: 2020-11-04
 layout: post
 title: Bubble Sort
 subtitle: What is bubble sort and how to implement?
@@ -7,7 +7,7 @@ description:
 image: /assets/img/Bubble_Sort.png
 optimized_image:
   
-category: ai
+category: algorithm
 tags:
   - Algorithm
   - Sorting
