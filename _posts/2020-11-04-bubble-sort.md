@@ -97,8 +97,5 @@ int main(void)
 }
 ```
 
-**Esacpe 문자 삭제 필요**
-
-
 ### Reference
 [1] <a href="https://fullyunderstood.com/pseudocodes/bubble-sort/">Bubble Sort</a><br>
