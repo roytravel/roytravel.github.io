@@ -1,5 +1,5 @@
 ---
-date: 2020-11-10
+date: 2020-11-16
 layout: post
 title: Python과 Opencv를 활용한 YOLO 구현
 subtitle: What is YOLO and how to implement?
