@@ -48,7 +48,6 @@ Windows Server 2016의 경우 Windows 10과 달리 기본적으로 내장되어 
 ![alt text](/assets/img/key_pair.png)
 
 생성된 키 페어 중 공개키인 id_rsa.pub을 remote로 작업할 Windows Server 2016의 .ssh 폴더 하위에 아래와 같이 authorized_keys에 추가해주어야 한다. 
-
 ![alt text](/assets/img/authorized_keys.png)
 authorized_keys가 없을 경우 파일을 생성하고 id_rsa.pub의 데이터를 동일하게 복붙해주면 된다.
 
@@ -65,7 +64,6 @@ Host 명의 경우 추후 ssh 명령을 사용할 때 축약하여 사용할 수
 이후 중요한 것은 config 파일의 사용 권한 설정이다. 일반적으로는 아래와 같이 3개의 보안 주체가 있는 것을 확인할 수 있을 것이다. 
 ![alt text](/assets/img/advanced_security_setting.png)
 
-
 여기에서 모든 보안 주체에 대해 상속을 사용하지 않음을 설정해주고 아래와 같이 모두 제거를 진행하여야 한다.
 ![alt text](/assets/img/advanced_security_setting_2.png)
 
@@ -76,8 +74,11 @@ Host 명의 경우 추후 ssh 명령을 사용할 때 축약하여 사용할 수
 ![alt text](/assets/img/ssh_connection.png)
 
 만약 비밀번호 없이 바로 접속하고 싶다면 아래와 같이 -i 옵션을 통해 비밀키인 id_rsa를 입력해주면 비밀번호 없이 remote로 접속이 가능하다.
-
 ![alt text](/assets/img/connection_without_password.png)
+
+다만 비밀번호 없이 바로 접속하기 위해서는 remote 측에서도 아래와 같이 OpenSSH가 설치된 **C:\ProgramData\SSH**의 폴더에서 authorized_keys 파일을 추가해주어야 비밀번호 없이 client에서 -i 옵션을 사용하여 접속이 가능하며,
+authorized_keys 파일은 sshd_config 파일의 맨 아래에서 경로를 설정해줄 수 있다.
+![alt text](/assets/img/authorized_keys_setting.png)
 
 만약 remote에 있는 파일을 실행하고 싶을 경우 아래와 같은 명령을 통해 파이썬 파일을 실행할 수 있다.
 ![alt text](/assets/img/ssh_command_execution.png)
