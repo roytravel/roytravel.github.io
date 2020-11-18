@@ -4,7 +4,7 @@ layout: post
 title: SSH(Secure Shell)란?
 subtitle: How to use SSH?
 description:
-image: /assets/img/SSH.jpg
+image: /assets/img/ssh.jpg
 optimized_image:
   
 category: network
