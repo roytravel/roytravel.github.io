@@ -283,7 +283,6 @@ if __name__ == '__main__':
 서버측의 경우 일회성으로 종료하는 것이 아닌, 계속해서 소켓 통신이 가능하도록 하였다.
 
 ### Reference
-[1] 
-[2] <a href="https://recipes4dev.tistory.com/153">소켓 프로그래밍. (Socket Programming)</a><br>
-[3] <a href="https://simsimjae.tistory.com/48">소켓(socket programming)프로그래밍이란</a><br>
-[4] <a href="https://12bme.tistory.com/228">[네트워크] 소켓프로그래밍 기초</a><br>
+[1] <a href="https://recipes4dev.tistory.com/153">소켓 프로그래밍. (Socket Programming)</a><br>
+[2] <a href="https://simsimjae.tistory.com/48">소켓(socket programming)프로그래밍이란</a><br>
+[3] <a href="https://12bme.tistory.com/228">[네트워크] 소켓프로그래밍 기초</a><br>
