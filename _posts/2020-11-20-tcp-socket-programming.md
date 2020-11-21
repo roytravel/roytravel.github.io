@@ -115,8 +115,7 @@ class TCPServer(threading.Thread):
                 self.connections.append(connection)
                 print ('[+] 연결 완료 : {}\n'.format(clientAddress))
 
-                subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection,
-                                                            clientAddress)
+                subThread = tcpServerThread.TCPServerThread(self.tcpServerThreads, self.connections, connection, clientAddress)
                 subThread.start()
                 self.tcpServerThreads.append(subThread)
         except:
