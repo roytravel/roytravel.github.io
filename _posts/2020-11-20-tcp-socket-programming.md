@@ -75,7 +75,7 @@ andRaspTCP = tcpServer.TCPServer("127.0.0.1", 50000)
 andRaspTCP.start()
 ```
 
-### Server - ServerThread.py
+### Server - tcpServerThread.py
 ```python
 # -*- coding:utf-8 -*-
 import socket, threading
@@ -128,7 +128,7 @@ class TCPServer(threading.Thread):
             pass
 ```
 
-### Server - Server.py
+### Server - tcpServer.py
 ```python
 # -*- coding:utf-8 -*-
 import socket, threading
