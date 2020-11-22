@@ -6,7 +6,7 @@ subtitle: 개발하며 발생한 에러를 해결하는 방법 모음
 description:
 image: /assets/img/troubleshooting_logo.png
 optimized_image:
-  
+
 category: tips
 tags:
   - Troubleshooting
@@ -33,6 +33,17 @@ paginate: true
 
 ---
 
+## [Ubuntu] conda
+[1] anaconda를 설치 후 conda 명령이 먹히질 않음
+
+>conda: command not found
+
+* 해결방법 : **source ~/.bashrc**
+
+---
+
+
 ### Reference
 [1]<a href="https://www.discoverbits.in/861/error-cannot-uninstall-wrapt-during-installation-tensorflow/">[Python] pip [1]</a><br>
 [2]<a href="https://github.com/pytorch/pytorch/issues/10443">[Python] pip [2]</a><br>
+[3]<a href="https://jisoo-coding.tistory.com/6">[Ubuntu] conda [1]</a><br>
