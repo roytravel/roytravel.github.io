@@ -42,8 +42,26 @@ paginate: true
 
 ---
 
+## [Raspberry pi] conda
+[1] 라즈베리파이에 Miniconda를 설치하려하는데 설치가 되지 않음
+
+* 해결방법 : **wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh**<br>
+라즈베리파이는 ARM 계열이므로 해당하는 파일을 다운로드 받아야함
+
+--- 
+
+[2] 라즈베리파이에 Miniconda를 설치하려하는데 실행이 되지 않음
+pi@raspberrypi:~/Downloads $ sh Miniconda3-latest-Linux-armv7l.sh<br>
+
+> Miniconda3-latest-Linux-armv7l.sh: 15: Miniconda3-latest-Linux-armv7l.sh: 0: not found<br>
+> Miniconda3-latest-Linux-armv7l.sh: 66: Miniconda3-latest-Linux-armv7l.sh: Syntax error: word unexpected (expecting ")")
+
+* 해결방법 : **sudo /bin/bash Miniconda3-latest-Linux-armv7l.sh**
+
 
 ### Reference
 [1]<a href="https://www.discoverbits.in/861/error-cannot-uninstall-wrapt-during-installation-tensorflow/">[Python] pip [1]</a><br>
 [2]<a href="https://github.com/pytorch/pytorch/issues/10443">[Python] pip [2]</a><br>
 [3]<a href="https://jisoo-coding.tistory.com/6">[Ubuntu] conda [1]</a><br>
+[4]<a href="https://m.blog.naver.com/PostView.nhn?blogId=cjstkdgml33&logNo=221517110919&proxyReferer=https:%2F%2Fwww.google.com%2F">[Raspberry pi] conda [1]</a><br>
+[5]<a href="https://m.blog.naver.com/PostView.nhn?blogId=cjstkdgml33&logNo=221517110919&proxyReferer=https:%2F%2Fwww.google.com%2F">[Raspberry pi] conda [2]</a><br>
