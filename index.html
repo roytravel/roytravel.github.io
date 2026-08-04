@@ -1,3 +1,227 @@
----
-layout: home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Engineer — Haneol Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav">
+    <div class="m">H. Lee</div>
+    <div class="links">
+      <a href="index.html">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a class="cv-btn" href="#" title="Link this to your hosted CV PDF">CV ↓</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero-section">
+  <div class="hero-block">
+    <div class="eyebrow">Open to Remote</div>
+    <h1>I build models that read <span>signals</span> other systems miss.</h1>
+    <p class="lede">Five years across ECG, speech, and video — pretraining and fine-tuning foundation models, then getting them into production APIs clinicians and product teams actually use.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#work">View Work →</a>
+      <a class="btn btn-outline" href="https://github.com/roytravel" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/haneol-lee-6a764319b/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Featured work</h2>
+      <span class="count">16 of 16 shown</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="projects/qt-prolongation-onset-prediction.html">
+        <div class="tag">Healthcare AI · Synergy AI</div>
+        <h3>QT Prolongation Onset Prediction</h3>
+        <p class="desc">1-/2-/3-day Long QT Syndrome risk model from ECG signals, benchmarking ResNet against a Quantum CNN, tuned as a high-sensitivity rule-out tool.</p>
+        <div class="stats"><span>AUROC 0.85</span><span>NPV 0.99</span></div>
+        <div class="stack"><span class="chip">ResNet</span><span class="chip">Quantum CNN</span><span class="chip">Signal Processing</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/tachycardia-bradycardia-syndrome-detection.html">
+        <div class="tag">Healthcare AI · Synergy AI</div>
+        <h3>Tachycardia-Bradycardia Syndrome (TBS) Detection</h3>
+        <p class="desc">Digitized scanned Holter reports via OCR, then labeled tachycardia episodes while excluding confounding diagnoses via clinical rule-based filtering.</p>
+        <div class="stats"><span>OCR Pipeline</span><span>Clinical Labeling</span></div>
+        <div class="stack"><span class="chip">Tesseract OCR</span><span class="chip">Holter ECG</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/multi-disease-screening-wearable-ecg.html">
+        <div class="tag">Healthcare AI · Synergy AI</div>
+        <h3>Multi-Disease Screening from Wearable ECG</h3>
+        <p class="desc">End-to-end pipeline — pretraining, fine-tuning, cohort validation — screening 10 clinical conditions directly from smartwatch ECG.</p>
+        <div class="stats"><span>AUROC &gt;0.80</span><span>Sens/Spec &gt;0.80</span></div>
+        <div class="stack"><span class="chip">PyTorch</span><span class="chip">Self-Supervised Pretraining</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/real-time-multi-biomarker-inference-api.html">
+        <div class="tag">MLOps · Synergy AI</div>
+        <h3>Real-Time Multi-Biomarker Inference API</h3>
+        <p class="desc">Real-time inference service for the ECG-based blood-biomarker model, outputting per-biomarker probabilities across 33 biomarkers via API.</p>
+        <div class="stats"><span>33 biomarkers</span><span>Real-Time</span></div>
+        <div class="stack"><span class="chip">FastAPI</span><span class="chip">ONNX</span><span class="chip">Triton</span><span class="chip">Docker</span><span class="chip">MLFlow</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/14-day-arrhythmia-forecasting.html">
+        <div class="tag">Healthcare AI · Synergy AI</div>
+        <h3>14-Day Arrhythmia Forecasting (27 Types)</h3>
+        <p class="desc">Pre-trained and fine-tuned 12-lead ECG foundation models to forecast arrhythmia onset 14 days out, with survival-analysis-based false-positive tracking.</p>
+        <div class="stats"><span>AUROC 0.81 (AFib)</span><span>0.77 (27 types)</span></div>
+        <div class="stack"><span class="chip">12-lead ECG</span><span class="chip">Survival Analysis</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/low-latency-clinical-speech-recognition.html">
+        <div class="tag">Speech AI · Synergy AI</div>
+        <h3>Low-Latency Clinical Speech Recognition</h3>
+        <p class="desc">LoRA fine-tuned Whisper-large-v3 on urology doctor–patient dialogue, quantized and served for the HyperMedicus STT product.</p>
+        <div class="stats"><span>Latency &lt;2s</span><span>CER 0.09</span><span>WER 0.12</span></div>
+        <div class="stack"><span class="chip">Whisper</span><span class="chip">LoRA</span><span class="chip">CTranslate2</span><span class="chip">Faster-Whisper</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/3d-facial-mesh-generation-3dfacecam.html">
+        <div class="tag">Computer Vision · Ellexi · National R&amp;D</div>
+        <h3>3D Facial Mesh Generation (3DFaceCAM)</h3>
+        <p class="desc">Trained a Korean-face 3D mesh generation model on distributed A100s for an AI-HUB public dataset release, built the TTA certification pipeline.</p>
+        <div class="stats"><span>Diversity 1.33</span><span>Specificity 0.90</span><span>4× A100 80GB</span></div>
+        <div class="stack"><span class="chip">3DFaceCAM</span><span class="chip">Docker</span><span class="chip">Multi-GPU</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/automated-golf-swing-editing.html">
+        <div class="tag">Computer Vision · Ellexi</div>
+        <h3>Automated Golf Swing Editing</h3>
+        <p class="desc">YOWO-based model to automatically detect the Setup-to-Impact phase of a golf swing, fusing audio-peak detection with visual localization.</p>
+        <div class="stats"><span>Action Localization</span></div>
+        <div class="stack"><span class="chip">YOWO</span><span class="chip">Audio-Visual Fusion</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/text-prompted-rotoscoping-plugin.html">
+        <div class="tag">Computer Vision · Ellexi</div>
+        <h3>Text-Prompted Rotoscoping Plugin</h3>
+        <p class="desc">FastSAM-based FastAPI server packaged as a Nuke plugin, turning a text prompt into a Bézier-curve rotoscoping mask.</p>
+        <div class="stats"><span>Text-to-Mask</span></div>
+        <div class="stack"><span class="chip">FastSAM</span><span class="chip">FastAPI</span><span class="chip">Nuke Plugin</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/workflow-automation-from-os-logs.html">
+        <div class="tag">Multi-Modal AI · Ellexi · National Grant (IITP)</div>
+        <h3>Workflow Automation from OS Logs</h3>
+        <p class="desc">Multi-modal model recommending and auto-executing the user's next action from OS logs. Wrote the technical proposal that won the grant.</p>
+        <div class="stats"><span>National Grant</span><span>PM Role</span></div>
+        <div class="stack"><span class="chip">Multi-Modal</span><span class="chip">MongoDB</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/large-scale-human-action-classification.html">
+        <div class="tag">Computer Vision · Ellexi</div>
+        <h3>Large-Scale Human Action Classification</h3>
+        <p class="desc">Trained 2-/3-person action-classification models on a 1.2TB video dataset across 8 GPUs, then Dockerized the pipeline for TTA validation.</p>
+        <div class="stats"><span>mAP 80.64% (2p)</span><span>84.69% (3p)</span></div>
+        <div class="stack"><span class="chip">YOWO</span><span class="chip">A100 ×4</span><span class="chip">V100 ×4</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/insurance-cross-sell-model.html">
+        <div class="tag">Applied ML · Ellexi</div>
+        <h3>Revenue-Driving Insurance Cross-Sell Model</h3>
+        <p class="desc">1,000+ lines of Oracle SQL to build feature tables, then trained XGBoost, LightGBM, and CatBoost to predict cross-sell propensity.</p>
+        <div class="stats"><span>Confirmed Revenue Lift</span></div>
+        <div class="stack"><span class="chip">XGBoost</span><span class="chip">LightGBM</span><span class="chip">CatBoost</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/drone-based-dolphin-habitat-protection.html">
+        <div class="tag">Conservation AI · MODULABS</div>
+        <h3>Drone-Based Dolphin Habitat Protection</h3>
+        <p class="desc">ByteTrack object tracking on drone footage to monitor tourism vessels near an endangered dolphin habitat — used as evidence for maritime law enforcement.</p>
+        <div class="stats"><span>IEEE CAI 2024</span><span>Kakao Impact</span></div>
+        <div class="stack"><span class="chip">ByteTrack</span><span class="chip">Object Tracking</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/cyber-threat-intelligence-ner.html">
+        <div class="tag">NLP / Security · Korea University</div>
+        <h3>Cyber Threat Intelligence NER</h3>
+        <p class="desc">30+ crawlers pulling 50,000+ security articles, a BIO-tagged domain dictionary, and a fine-tuned BERT-NER model for threat entity extraction.</p>
+        <div class="stats"><span>F1 65% → 90%</span></div>
+        <div class="stack"><span class="chip">BERT-NER</span><span class="chip">BIO Tagging</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/national-in-vehicle-nids-competition.html">
+        <div class="tag">Security · Korea University</div>
+        <h3>National In-Vehicle N-IDS Competition</h3>
+        <p class="desc">Organized a nationwide CAN-network anomaly-detection competition, co-authored the NDSS Workshop (AutoSec) paper, published the dataset on IEEE DataPort.</p>
+        <div class="stats"><span>NDSS AutoSec</span><span>IEEE DataPort</span></div>
+        <div class="stack"><span class="chip">CAN Protocol</span><span class="chip">Anomaly Detection</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" href="projects/mhc-peptide-binding-affinity-prediction.html">
+        <div class="tag">Computational Biology · Personal Project</div>
+        <h3>MHC–Peptide Binding Affinity Prediction</h3>
+        <p class="desc">Self-directed project outside my formal domain: modeled peptide–protein binding to shrink the drug candidate search space.</p>
+        <div class="stats"><span>Grand Prize · K-Medihub</span></div>
+        <div class="stack"><span class="chip">DeepAttentionPan</span><span class="chip">BLOSUM62</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-label">About</div>
+      <div class="about-copy">
+        <p>I work across ECG, speech, and video — but the common thread is always the same: turning a noisy, real-world <span class="hl">signal</span> into something a clinician, a product team, or a courtroom can act on.</p>
+        <p>Most of my career has been split between national R&D projects and production teams, which means I'm equally comfortable writing a research proposal and shipping the API endpoint that follows it.</p>
+        <div class="facts">
+          <div class="fact"><span>Base</span><span>Seoul, South Korea</span></div>
+          <div class="fact"><span>Focus</span><span>Signal Processing · Speech · Computer Vision</span></div>
+          <div class="fact"><span>Education</span><span>M.S. Cybersecurity, Korea University</span></div>
+          <div class="fact"><span>Currently</span><span>Lead AI Research Engineer, Synergy AI</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="contact-block">
+    <h2>Let's talk.</h2>
+    <div class="contact-links">
+      <a href="mailto:roytravel97@gmail.com">roytravel97@gmail.com ↗</a>
+      <a href="https://github.com/roytravel" target="_blank" rel="noopener">github.com/roytravel ↗</a>
+      <a href="https://www.linkedin.com/in/haneol-lee-6a764319b/" target="_blank" rel="noopener">linkedin.com/in/haneol-lee ↗</a>
+    </div>
+  </div>
+  <div class="fine">
+    <span>Haneol Lee — AI Engineer</span>
+    <span>Open to remote opportunities</span>
+  </div>
+</footer>
+
+</body>
+</html>
