@@ -12,12 +12,12 @@
 
 <div class="navbar">
   <div class="nav">
-    <div class="m">H. Lee</div>
+    <div class="m">Haneol Lee</div>
     <div class="links">
       <a href="index.html">Work</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
-      <a class="cv-btn" href="#" title="Link this to your hosted CV PDF">CV ↓</a>
+      <a class="cv-btn" href="https://www.linkedin.com/in/haneol-lee-6a764319b/" target="_blank" rel="noopener">CV ↗</a>
     </div>
   </div>
 </div>
@@ -41,8 +41,18 @@
       <h2>Featured work</h2>
       <span class="count">16 of 16 shown</span>
     </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All <span class="fbadge">16</span></button>
+      <button class="filter-btn" data-filter="computer-vision">Computer Vision <span class="fbadge">5</span></button>
+      <button class="filter-btn" data-filter="signal-processing">Signal Processing <span class="fbadge">5</span></button>
+      <button class="filter-btn" data-filter="speech-recognition">Speech Recognition <span class="fbadge">1</span></button>
+      <button class="filter-btn" data-filter="natural-language-processing">NLP <span class="fbadge">1</span></button>
+      <button class="filter-btn" data-filter="machine-learning">Machine Learning <span class="fbadge">4</span></button>
+    </div>
+
     <div class="cards">
-      <a class="card" href="projects/qt-prolongation-onset-prediction.html">
+      <a class="card" data-cat="signal-processing" href="projects/qt-prolongation-onset-prediction.html">
         <div class="tag">Healthcare AI · Synergy AI</div>
         <h3>QT Prolongation Onset Prediction</h3>
         <p class="desc">1-/2-/3-day Long QT Syndrome risk model from ECG signals, benchmarking ResNet against a Quantum CNN, tuned as a high-sensitivity rule-out tool.</p>
@@ -51,7 +61,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/tachycardia-bradycardia-syndrome-detection.html">
+      <a class="card" data-cat="signal-processing" href="projects/tachycardia-bradycardia-syndrome-detection.html">
         <div class="tag">Healthcare AI · Synergy AI</div>
         <h3>Tachycardia-Bradycardia Syndrome (TBS) Detection</h3>
         <p class="desc">Digitized scanned Holter reports via OCR, then labeled tachycardia episodes while excluding confounding diagnoses via clinical rule-based filtering.</p>
@@ -60,7 +70,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/multi-disease-screening-wearable-ecg.html">
+      <a class="card" data-cat="signal-processing" href="projects/multi-disease-screening-wearable-ecg.html">
         <div class="tag">Healthcare AI · Synergy AI</div>
         <h3>Multi-Disease Screening from Wearable ECG</h3>
         <p class="desc">End-to-end pipeline — pretraining, fine-tuning, cohort validation — screening 10 clinical conditions directly from smartwatch ECG.</p>
@@ -69,7 +79,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/real-time-multi-biomarker-inference-api.html">
+      <a class="card" data-cat="signal-processing" href="projects/real-time-multi-biomarker-inference-api.html">
         <div class="tag">MLOps · Synergy AI</div>
         <h3>Real-Time Multi-Biomarker Inference API</h3>
         <p class="desc">Real-time inference service for the ECG-based blood-biomarker model, outputting per-biomarker probabilities across 33 biomarkers via API.</p>
@@ -78,7 +88,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/14-day-arrhythmia-forecasting.html">
+      <a class="card" data-cat="signal-processing" href="projects/14-day-arrhythmia-forecasting.html">
         <div class="tag">Healthcare AI · Synergy AI</div>
         <h3>14-Day Arrhythmia Forecasting (27 Types)</h3>
         <p class="desc">Pre-trained and fine-tuned 12-lead ECG foundation models to forecast arrhythmia onset 14 days out, with survival-analysis-based false-positive tracking.</p>
@@ -87,7 +97,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/low-latency-clinical-speech-recognition.html">
+      <a class="card" data-cat="speech-recognition" href="projects/low-latency-clinical-speech-recognition.html">
         <div class="tag">Speech AI · Synergy AI</div>
         <h3>Low-Latency Clinical Speech Recognition</h3>
         <p class="desc">LoRA fine-tuned Whisper-large-v3 on urology doctor–patient dialogue, quantized and served for the HyperMedicus STT product.</p>
@@ -96,7 +106,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/3d-facial-mesh-generation-3dfacecam.html">
+      <a class="card" data-cat="computer-vision" href="projects/3d-facial-mesh-generation-3dfacecam.html">
         <div class="tag">Computer Vision · Ellexi · National R&amp;D</div>
         <h3>3D Facial Mesh Generation (3DFaceCAM)</h3>
         <p class="desc">Trained a Korean-face 3D mesh generation model on distributed A100s for an AI-HUB public dataset release, built the TTA certification pipeline.</p>
@@ -105,7 +115,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/automated-golf-swing-editing.html">
+      <a class="card" data-cat="computer-vision" href="projects/automated-golf-swing-editing.html">
         <div class="tag">Computer Vision · Ellexi</div>
         <h3>Automated Golf Swing Editing</h3>
         <p class="desc">YOWO-based model to automatically detect the Setup-to-Impact phase of a golf swing, fusing audio-peak detection with visual localization.</p>
@@ -114,7 +124,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/text-prompted-rotoscoping-plugin.html">
+      <a class="card" data-cat="computer-vision" href="projects/text-prompted-rotoscoping-plugin.html">
         <div class="tag">Computer Vision · Ellexi</div>
         <h3>Text-Prompted Rotoscoping Plugin</h3>
         <p class="desc">FastSAM-based FastAPI server packaged as a Nuke plugin, turning a text prompt into a Bézier-curve rotoscoping mask.</p>
@@ -123,16 +133,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/workflow-automation-from-os-logs.html">
-        <div class="tag">Multi-Modal AI · Ellexi · National Grant (IITP)</div>
-        <h3>Workflow Automation from OS Logs</h3>
-        <p class="desc">Multi-modal model recommending and auto-executing the user's next action from OS logs. Wrote the technical proposal that won the grant.</p>
-        <div class="stats"><span>National Grant</span><span>PM Role</span></div>
-        <div class="stack"><span class="chip">Multi-Modal</span><span class="chip">MongoDB</span></div>
-        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
-      </a>
-
-      <a class="card" href="projects/large-scale-human-action-classification.html">
+      <a class="card" data-cat="computer-vision" href="projects/large-scale-human-action-classification.html">
         <div class="tag">Computer Vision · Ellexi</div>
         <h3>Large-Scale Human Action Classification</h3>
         <p class="desc">Trained 2-/3-person action-classification models on a 1.2TB video dataset across 8 GPUs, then Dockerized the pipeline for TTA validation.</p>
@@ -141,16 +142,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/insurance-cross-sell-model.html">
-        <div class="tag">Applied ML · Ellexi</div>
-        <h3>Revenue-Driving Insurance Cross-Sell Model</h3>
-        <p class="desc">1,000+ lines of Oracle SQL to build feature tables, then trained XGBoost, LightGBM, and CatBoost to predict cross-sell propensity.</p>
-        <div class="stats"><span>Confirmed Revenue Lift</span></div>
-        <div class="stack"><span class="chip">XGBoost</span><span class="chip">LightGBM</span><span class="chip">CatBoost</span></div>
-        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
-      </a>
-
-      <a class="card" href="projects/drone-based-dolphin-habitat-protection.html">
+      <a class="card" data-cat="computer-vision" href="projects/drone-based-dolphin-habitat-protection.html">
         <div class="tag">Conservation AI · MODULABS</div>
         <h3>Drone-Based Dolphin Habitat Protection</h3>
         <p class="desc">ByteTrack object tracking on drone footage to monitor tourism vessels near an endangered dolphin habitat — used as evidence for maritime law enforcement.</p>
@@ -159,7 +151,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/cyber-threat-intelligence-ner.html">
+      <a class="card" data-cat="natural-language-processing" href="projects/cyber-threat-intelligence-ner.html">
         <div class="tag">NLP / Security · Korea University</div>
         <h3>Cyber Threat Intelligence NER</h3>
         <p class="desc">30+ crawlers pulling 50,000+ security articles, a BIO-tagged domain dictionary, and a fine-tuned BERT-NER model for threat entity extraction.</p>
@@ -168,7 +160,25 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/national-in-vehicle-nids-competition.html">
+      <a class="card" data-cat="machine-learning" href="projects/workflow-automation-from-os-logs.html">
+        <div class="tag">Multi-Modal AI · Ellexi · National Grant (IITP)</div>
+        <h3>Workflow Automation from OS Logs</h3>
+        <p class="desc">Multi-modal model recommending and auto-executing the user's next action from OS logs. Wrote the technical proposal that won the grant.</p>
+        <div class="stats"><span>National Grant</span><span>PM Role</span></div>
+        <div class="stack"><span class="chip">Multi-Modal</span><span class="chip">MongoDB</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" data-cat="machine-learning" href="projects/insurance-cross-sell-model.html">
+        <div class="tag">Applied ML · Ellexi</div>
+        <h3>Revenue-Driving Insurance Cross-Sell Model</h3>
+        <p class="desc">1,000+ lines of Oracle SQL to build feature tables, then trained XGBoost, LightGBM, and CatBoost to predict cross-sell propensity.</p>
+        <div class="stats"><span>Confirmed Revenue Lift</span></div>
+        <div class="stack"><span class="chip">XGBoost</span><span class="chip">LightGBM</span><span class="chip">CatBoost</span></div>
+        <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
+      </a>
+
+      <a class="card" data-cat="machine-learning" href="projects/national-in-vehicle-nids-competition.html">
         <div class="tag">Security · Korea University</div>
         <h3>National In-Vehicle N-IDS Competition</h3>
         <p class="desc">Organized a nationwide CAN-network anomaly-detection competition, co-authored the NDSS Workshop (AutoSec) paper, published the dataset on IEEE DataPort.</p>
@@ -177,7 +187,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" href="projects/mhc-peptide-binding-affinity-prediction.html">
+      <a class="card" data-cat="machine-learning" href="projects/mhc-peptide-binding-affinity-prediction.html">
         <div class="tag">Computational Biology · Personal Project</div>
         <h3>MHC–Peptide Binding Affinity Prediction</h3>
         <p class="desc">Self-directed project outside my formal domain: modeled peptide–protein binding to shrink the drug candidate search space.</p>
@@ -195,13 +205,83 @@
     <div class="about-grid">
       <div class="about-label">About</div>
       <div class="about-copy">
-        <p>I work across ECG, speech, and video — but the common thread is always the same: turning a noisy, real-world <span class="hl">signal</span> into something a clinician, a product team, or a courtroom can act on.</p>
-        <p>Most of my career has been split between national R&D projects and production teams, which means I'm equally comfortable writing a research proposal and shipping the API endpoint that follows it.</p>
+        <p>My name is Haneol Lee — Roy in English. I work across ECG, speech, and video — but the common thread is always the same: turning a noisy, real-world <span class="hl">signal</span> into something a clinician, a product team, or a courtroom can act on.</p>
+        <p>Most of my career has been split between national R&amp;D projects and production teams, which means I'm equally comfortable writing a research proposal and shipping the API endpoint that follows it.</p>
         <div class="facts">
           <div class="fact"><span>Base</span><span>Seoul, South Korea</span></div>
-          <div class="fact"><span>Focus</span><span>Signal Processing · Speech · Computer Vision</span></div>
+          <div class="fact"><span>Focus</span><span>Signal Processing · Speech · Computer Vision · NLP</span></div>
           <div class="fact"><span>Education</span><span>M.S. Cybersecurity, Korea University</span></div>
           <div class="fact"><span>Currently</span><span>Lead AI Research Engineer, Synergy AI</span></div>
+          <div class="fact"><span>Contact</span><span>roytravel97@gmail.com</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Publications</h2>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-body">
+          <div class="pub-title">Deep Learning for Overseeing Indo-Pacific Bottlenose Dolphin Tourism Law Enforcement</div>
+          <div class="pub-venue">IEEE CAI 2024 · A14E track</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div class="pub-body">
+          <div class="pub-title">Research on Memory Analysis Bypass Techniques and Kernel Modification Detection</div>
+          <div class="pub-venue">Master's Thesis · Korea University</div>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-year">2020</div>
+        <div class="pub-body">
+          <div class="pub-title">Car Hacking and Defense Competition on In-Vehicle Network</div>
+          <div class="pub-venue">NDSS Workshop (AutoSec) · IEEE DataPort dataset release</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Honors &amp; Awards</h2>
+    </div>
+    <div class="award-list">
+      <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-body">
+          <div class="award-title">Grand Prize — AI Drug Discovery Idea Competition (K-Medihub)</div>
+          <div class="award-sub">₩2,000,000 prize · 2024 · With commercialization proposals from judges</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥇</div>
+        <div class="award-body">
+          <div class="award-title">Grand Prize (Minister's Award) — Best of the Best (BoB) Top 10 Security Leaders</div>
+          <div class="award-sub">Ministry of Science and ICT · ₩10,000,000 prize · Top 10 of 160 trainees · 2019</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">🥈</div>
+        <div class="award-body">
+          <div class="award-title">2nd Place — Volatility Foundation Analysis Contest (International)</div>
+          <div class="award-sub">Memory-forensics report on 2018 PyeongChang Olympic Destroyer malware · $750 prize · 2018</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">📜</div>
+        <div class="award-body">
+          <div class="award-title">Official Commendation — Gyeongnam Provincial Police Agency</div>
+          <div class="award-sub">Letter of Appreciation · 2018</div>
         </div>
       </div>
     </div>
@@ -218,10 +298,33 @@
     </div>
   </div>
   <div class="fine">
-    <span>Haneol Lee — AI Engineer</span>
+    <span>Haneol (Roy) Lee — AI Engineer</span>
     <span>Open to remote opportunities</span>
   </div>
 </footer>
+
+<script>
+(function(){
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+  const countEl = document.querySelector('.count');
+  const total = cards.length;
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.dataset.filter;
+      var shown = 0;
+      cards.forEach(function(c){
+        var match = f === 'all' || c.dataset.cat === f;
+        c.style.display = match ? 'block' : 'none';
+        if(match) shown++;
+      });
+      countEl.textContent = shown + ' of ' + total + ' shown';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

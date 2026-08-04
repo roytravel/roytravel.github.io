@@ -186,3 +186,63 @@ footer{ padding-bottom:60px; }
 }
 .paper-link:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); color:var(--accent); }
 .paper-link .src{ font-weight:500; color:var(--muted); font-size:12px; }
+
+/* ---------- FILTER ---------- */
+.filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+.filter-btn{
+  font-family:'Manrope',sans-serif; font-weight:600; font-size:12.5px;
+  padding:8px 16px; border-radius:100px; border:none; cursor:pointer;
+  background:#fff; color:var(--muted); box-shadow:var(--shadow-sm);
+  transition: background .15s, color .15s, box-shadow .15s;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.filter-btn:hover{ color:var(--ink); box-shadow:var(--shadow-md); }
+.filter-btn.active{ background:var(--accent); color:#fff; box-shadow:none; }
+.fbadge{
+  font-size:10.5px; font-weight:700; padding:1px 7px; border-radius:100px;
+  background:var(--accent-soft); color:var(--accent);
+  transition: background .15s, color .15s;
+}
+.filter-btn.active .fbadge{ background:rgba(255,255,255,0.22); color:#fff; }
+
+/* ---------- PUBLICATIONS ---------- */
+.pub-list{
+  background:#fff; border-radius:20px; box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.pub-item{
+  display:grid; grid-template-columns:52px 1fr; gap:20px;
+  padding:20px 24px; border-bottom:1px solid #F0F1F5; align-items:start;
+}
+.pub-item:last-child{ border-bottom:none; }
+.pub-year{
+  font-family:'Manrope',sans-serif; font-weight:700; font-size:12px;
+  color:var(--accent); padding-top:2px;
+}
+.pub-title{
+  font-family:'Manrope',sans-serif; font-weight:600; font-size:14.5px;
+  color:var(--ink); line-height:1.45;
+}
+.pub-venue{
+  font-family:'Manrope',sans-serif; font-size:12.5px;
+  color:var(--muted); margin-top:5px;
+}
+
+/* ---------- HONORS & AWARDS ---------- */
+.award-list{ display:flex; flex-direction:column; gap:12px; }
+.award-item{
+  background:#fff; border-radius:20px; box-shadow:var(--shadow-sm);
+  padding:20px 24px; display:flex; align-items:flex-start; gap:16px;
+}
+.award-icon{
+  flex-shrink:0; width:40px; height:40px; border-radius:12px;
+  background:var(--accent-soft); display:flex; align-items:center;
+  justify-content:center; font-size:18px; line-height:1;
+}
+.award-body .award-title{
+  font-family:'Manrope',sans-serif; font-weight:700; font-size:14px;
+  color:var(--ink); line-height:1.4;
+}
+.award-body .award-sub{
+  font-size:12.5px; color:var(--muted); margin-top:5px;
+}
