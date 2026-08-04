@@ -187,6 +187,24 @@ footer{ padding-bottom:60px; }
 .paper-link:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); color:var(--accent); }
 .paper-link .src{ font-weight:500; color:var(--muted); font-size:12px; }
 
+/* ---------- CARD META HEADER ---------- */
+.card-header{
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  align-items:center; gap:6px; margin-bottom:12px;
+}
+.card-domain{
+  font-family:'Manrope',sans-serif; font-weight:700; font-size:11px;
+  letter-spacing:0.04em; color:var(--accent); text-transform:uppercase;
+}
+.card-org{
+  font-family:'Manrope',sans-serif; font-weight:600; font-size:11.5px;
+  color:var(--muted); text-align:center;
+}
+.card-period{
+  font-family:'Manrope',sans-serif; font-weight:500; font-size:11px;
+  color:var(--muted); text-align:right; white-space:nowrap;
+}
+
 /* ---------- FILTER ---------- */
 .filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
 .filter-btn{
