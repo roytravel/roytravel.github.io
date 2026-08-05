@@ -188,6 +188,8 @@ footer{ padding-bottom:60px; }
   width:100%; height:auto; display:block; border-radius:16px;
 }
 .proof-tile--full{ grid-column: 1 / -1; }
+.proof-tile--video{ padding:0; border:1.5px solid #E2E8F4; overflow:hidden; aspect-ratio:unset; }
+.proof-tile--video video{ width:100%; height:auto; display:block; border-radius:16px; }
 .proof-caption{
   position:absolute; bottom:0; left:0; right:0;
   background:linear-gradient(transparent, rgba(15,27,61,0.72));
