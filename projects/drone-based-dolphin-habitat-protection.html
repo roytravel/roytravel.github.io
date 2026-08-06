@@ -26,7 +26,7 @@
 <div class="detail-hero">
   <a class="back-link" href="../index.html#work">&larr; Back to all work</a>
   <div class="detail-block">
-    <div class="detail-tag">Conservation AI · MODULABS · with Kakao Impact</div>
+    <div class="detail-tag">Conservation AI · MODULABS · with Kakao Impact &amp; Jeju Provincial Government</div>
     <h1>Drone-Based Dolphin Habitat Protection</h1>
     <div class="detail-meta"><span><b>MODULABS · Aug 2023 – Jan 2024</b></span></div>
   </div>
@@ -34,31 +34,142 @@
 
 <div class="detail-body">
 
+  <!-- Demo video: top visual hook -->
+  <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/dolphin-protection/demo-drone-tracking-poster.jpg">
+          <source src="../assets/projects/dolphin-protection/demo-drone-tracking-web.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Off the coast of Jeju, tourism vessels have been encroaching on the habitat of the endangered Indo-Pacific bottlenose dolphin — activity that Korean maritime ecosystem law prohibits, but which is hard to prove without evidence. I trained ByteTrack object-tracking models on drone footage to monitor vessel activity around the habitat.</p>
-    <p>The tracking output became the evidentiary basis referenced in maritime law enforcement discussions. The work was published at IEEE CAI 2024, presented at the Kakao Impact Conference and MODUCON 2023, and covered by Korean tech and general media.</p>
+    <p>The Indo-Pacific bottlenose dolphin (<i>Tursiops aduncus</i>) is a protected species endemic to Jeju Island's waters. Despite Korea's Marine Ecosystem Act prohibiting tourism vessels from approaching within 50m of dolphin pods, violations were widespread and nearly impossible to enforce — no one could document them at scale.</p>
+    <p>Working with Kakao Impact, the Jeju Provincial Government, and MARC across 20 weeks, I built a drone-based AI monitoring system using <b>ByteTrack</b> for multi-object tracking. The system detects vessels and dolphins from live drone footage, calculates real-time distances, and automatically flags regulatory violations — turning a documentation gap into an evidence base for law enforcement. The work was published at <b>IEEE CAI 2024</b> and presented at the Kakao Impact Conference and MODUCON 2023.</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>IEEE CAI 2024</span><span>Kakao Impact Conference</span></div>
+    <div class="detail-stats">
+      <span>IEEE CAI 2024</span>
+      <span>Kakao Impact Conference</span>
+      <span>MODUCON 2023</span>
+      <span>Korean media coverage</span>
+    </div>
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/dolphin-protection/result-detection-ship-distance.png" alt="Drone detection: vessel 48.2m from dolphin pod, within violation zone">
+        <span class="proof-caption">Live detection output — vessel 48.2m from dolphin pod (50m limit violated)</span>
+      </div>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>ByteTrack</span><span>Object Tracking</span></div>
+    <div class="detail-stack">
+      <span>ByteTrack</span>
+      <span>SAHI</span>
+      <span>Object Detection</span>
+      <span>Drone Vision</span>
+      <span>Orthophoto</span>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Drone footage tracking overlay<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Vessel proximity heatmap<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img">
+        <img src="../assets/projects/dolphin-protection/presenting-kakao-impact.png" alt="Team kickoff at MODULABS">
+        <span class="proof-caption">Team kickoff session at MODULABS (모두의 연구소)</span>
+      </div>
+      <div class="proof-tile proof-tile--img">
+        <img src="../assets/projects/dolphin-protection/team-weekly-meetings.png" alt="20 weeks of team meetings including Jeju fieldwork">
+        <span class="proof-caption">20 weeks of meetings at MODULABS — including Jeju Island fieldwork (Week 13)</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/dolphin-protection/team-members.png" alt="Team members">
+        <span class="proof-caption">Team — 이한얼: ByteTrack &amp; Object Detection</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/dolphin-protection/research-drone-coordinate-paper.png" alt="Research reference: drone camera coordinate transformation paper">
+        <span class="proof-caption">Reference paper: pixel-to-geographic coordinate transformation for drone cameras</span>
+      </div>
+    </div>
   </div>
-  
+
+  <div class="section-block">
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Ask for help early when you're stuck</div>
+          <div class="pub-venue">Time lost struggling alone is time the team doesn't get back — reaching out to a teammate quickly is always the right call.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Keeping a team together requires genuine commitment from the leader and visible social impact</div>
+          <div class="pub-venue">People stay when they see the leader caring deeply and when the project demonstrably creates value for society — not just for the résumé.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Diverse backgrounds mean unequal domain understanding — communication takes extra care</div>
+          <div class="pub-venue">When engineers, researchers, and domain experts work together, the baseline for what's "obvious" shifts per person. Assuming shared context is the fastest way to misalign.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Good work leads to referrals and job offers through colleagues</div>
+          <div class="pub-venue">With the right skills and reputation, introductions and opportunities come naturally through the people you've worked alongside.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">For complex implementations, reach for open source first</div>
+          <div class="pub-venue">ByteTrack, SAHI, and other existing tools covered the hardest parts — building from scratch would have consumed the entire timeline.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Group labeling requires a labeling policy</div>
+          <div class="pub-venue">When many people label data simultaneously without a shared standard, inconsistencies compound fast — defining the policy before starting saves far more time than fixing it after.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Log hyperparameter experiments with W&amp;B</div>
+          <div class="pub-venue">Weights &amp; Biases makes experiment tracking effortless — without it, reproducing or comparing runs becomes a manual headache.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section-block">
     <h2>Reference</h2>
-    <div class="paper-links"><a class="paper-link" href="https://openreview.net/pdf?id=bnduW0yJrV" target="_blank" rel="noopener"><span>Read the paper — IEEE CAI 2024 (AI4E)</span><span class="src">OpenReview ↗</span></a><a class="paper-link" href="https://n.news.naver.com/article/005/0001659346?sid=102" target="_blank" rel="noopener"><span>Media coverage — Naver News</span><span class="src">Naver News ↗</span></a></div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <a class="press-card" href="https://openreview.net/pdf?id=bnduW0yJrV" target="_blank" rel="noopener">
+        <div class="press-info">
+          <div class="press-source">IEEE CAI 2024 · OpenReview</div>
+          <div class="press-headline">Deep Learning for Overseeing Indo-Pacific Bottlenose Dolphin Tourism Law Enforcement</div>
+        </div>
+        <div class="press-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </div>
+      </a>
+      <a class="press-card" href="https://n.news.naver.com/article/005/0001659346?sid=102" target="_blank" rel="noopener">
+        <div class="press-info">
+          <div class="press-source">Naver News · 국민일보</div>
+          <div class="press-headline">AI로 제주 남방큰돌고래 서식지 보호 — 언론 보도</div>
+        </div>
+        <div class="press-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </div>
+      </a>
+    </div>
   </div>
 
 </div>
