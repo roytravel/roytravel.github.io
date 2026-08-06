@@ -35,9 +35,19 @@
 <div class="detail-body">
 
   <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/insurance-cross-sell/arch-insurance-cross-sell.png" alt="Insurance cross-sell model architecture">
+        <span class="proof-caption">System architecture — Development &amp; Operation pipeline</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
     <h2>Overview</h2>
-    <p>Kyobo Life Insurance wanted to know which existing customers were likely to buy additional coverage. Getting there started with the unglamorous part: writing over 1,000 lines of Oracle SQL to build the feature tables from raw customer data.</p>
-    <p>From those features, I trained and compared XGBoost, LightGBM, and CatBoost models to predict cross-sell propensity. Forward testing — running the model against real, subsequent customer behavior — confirmed it drove an actual revenue increase, not just a good offline metric.</p>
+    <p>Deployed as a contractor from Ellexi to Kyobo Life Insurance, I built an end-to-end cross-sell prediction system to identify which existing customers were likely to purchase additional coverage — and what product line they'd be most likely to buy.</p>
+    <p>The engagement was conducted entirely within a <b>closed, air-gapped network</b> for security compliance — no internet access, no LLM assistance. All 1,000+ lines of Oracle SQL for constructing customer feature tables from raw transaction and policy data were written from scratch, followed by full EDA and feature engineering.</p>
+    <p>Two models were trained in parallel: a <b>binary classifier</b> to predict whether a customer would make an additional purchase, and a <b>multiclass classifier</b> to predict the specific product line and coverage tier. Coverage tiers are defined as premium bands in Korean Won (e.g. A만원~B만원), spanning Protection-type and Savings-type product lines. In operation, the system outputs a ranked prospect list with per-tier purchase probabilities for each customer. Forward testing against real subsequent purchases confirmed a measurable revenue lift.</p>
   </div>
 
   <div class="section-block">
@@ -47,13 +57,49 @@
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>Oracle SQL</span><span>XGBoost</span><span>LightGBM</span><span>CatBoost</span></div>
+    <div class="detail-stack"><span>Oracle SQL</span><span>XGBoost</span><span>LightGBM</span><span>CatBoost</span><span>EDA</span><span>Feature Engineering</span></div>
   </div>
 
   <div class="section-block">
-    <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Feature importance chart<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Forward-testing results summary<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Class imbalance is a much bigger deal in production than in textbooks</div>
+          <div class="pub-venue">Real customer data is heavily skewed — handling imbalance isn't a footnote, it's a first-class concern that shapes every modeling decision.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">When hypothesis validation yields unexpected results, audit the validation process first</div>
+          <div class="pub-venue">Surprising results usually point to a flaw in the evaluation setup, not the hypothesis — check the pipeline before abandoning the assumption.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Communication throughout the modeling process matters more than model performance</div>
+          <div class="pub-venue">Stakeholders need to trust and act on the output. The ability to explain assumptions, limitations, and results clearly is what makes a model useful in production.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Choose the right correlation method based on feature and target types</div>
+          <div class="pub-venue">Numerical-to-numerical, categorical-to-numerical, categorical-to-categorical — each requires a different statistical test. Using the wrong one silently misleads feature selection.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Precision vs. recall trade-off is defined by the business problem, not the F1 score</div>
+          <div class="pub-venue">For cross-sell, missing a high-intent customer (low recall) costs revenue; spamming uninterested customers (low precision) costs trust. The right balance is a product decision, not a metric one.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">SQL query tuning is a deep skill when data lives behind Oracle at scale</div>
+          <div class="pub-venue">With 1,000+ lines of feature SQL on a closed network, query execution time directly blocked iteration speed — understanding indexes, execution plans, and join strategies was essential.</div>
+        </div>
+      </div>
+    </div>
   </div>
   
 

@@ -295,8 +295,12 @@ footer{ padding-bottom:60px; }
 .pub-item{
   display:grid; grid-template-columns:52px 1fr; gap:20px;
   padding:20px 24px; border-bottom:1px solid #F0F1F5; align-items:start;
+  text-decoration:none;
 }
 .pub-item:last-child{ border-bottom:none; }
+a.pub-item{ transition:background .15s; }
+a.pub-item:hover{ background:#F5F7FF; }
+a.pub-item:hover .pub-title{ color:var(--accent); }
 .pub-year{
   font-family:'Manrope',sans-serif; font-weight:700; font-size:12px;
   color:var(--accent); padding-top:2px;
