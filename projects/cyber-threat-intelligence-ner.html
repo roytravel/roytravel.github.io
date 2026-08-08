@@ -36,26 +36,113 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Security analysts drown in unstructured threat reporting. This project, done with Samsung SDS, aimed to extract structured threat entities automatically from that flood of text using named entity recognition.</p>
-    <p>I built 30+ crawlers to pull 50,000+ security articles, constructed a BIO-tagged domain-specific dictionary from scratch, and fine-tuned a PyTorch BERT-NER model — pushing F1 from 65% to 90% after a round of cleaning up mislabeled training data.</p>
+    <p>Security analysts drown in unstructured threat reporting. This project, done with Samsung SDS, aimed to extract structured threat entities (IOCs like hashes, IPs, and CVEs, plus threat actors, malware, and mitigations) automatically from that flood of text.</p>
+    <p>I built 30+ crawlers to pull 50,000+ security articles into MySQL, constructed a BIO-tagged domain-specific dictionary from scratch, and fine-tuned a PyTorch BERT-NER model, pushing weighted F1 from 65% to 91% after a round of cleaning up mislabeled training data.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Goal: regex extraction wasn't enough</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/diagram-goal-regex-to-ner.png" alt="Regex-based IOC extraction table on the left, NER model highlighting entities like ADVERSARY, COUNTRY, MALWARE, and INDUSTRY in real threat text on the right">
+        <span class="proof-caption">From fixed regex patterns per IOC type to a model that recognizes entities in context</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">The starting point was pattern matching: a regular expression per IOC type (filename, hash, CVE, URL, IPv4). That catches well-formed indicators but misses everything regex can't express, like which adversary group, country, or industry a report is actually describing. The goal was to replace that with a named entity recognition model that reads the sentence instead of just scanning for a shape.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Related work</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/research-prior-work-ioc-classifier.png" alt="Prior work: security articles processed through syntactic parsing and word embedding into an NER-based IOC classifier">
+        <span class="proof-caption">Prior work — syntactic parsing + word embedding feeding an NER-based IOC classifier</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/research-prior-work-cti-extraction-pipeline.png" alt="Prior work: Google Cloud NLP API and CRF suite combined for CTI (IoC + TTPs) extraction and semantic role labeling">
+        <span class="proof-caption">Prior work — combining a cloud NLP API with a CRF-based IOC recognizer for full CTI (IOC + TTP) extraction</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/research-prior-work-malware-graph.png" alt="Prior work: data extraction and graph construction pipeline building a refined malware relationship graph">
+        <span class="proof-caption">Prior work — building a malware relationship graph from raw articles, then cross-checking sources for consistency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Building the pipeline</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/result-crawled-articles-mysql.png" alt="MySQL table of crawled security articles from sources like HackerNews, Securelist, and BleepingComputer">
+        <span class="proof-caption">30+ crawlers feeding a MySQL table — source, title, URL, publisher, and both published and collected timestamps</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/cyber-threat-ner/diagram-bio-tagging-example.png" alt="BIO tagging example: word, POS, chunk, and NER columns for the phrase The United Arab Emirates" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">BIO tagging scheme — B-LOC/I-LOC spans marking a multi-word location entity</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/cyber-threat-ner/result-domain-dictionary.png" alt="Cybersecurity domain dictionary with columns for organization, location, person, threat actor, attack method, mitigation, product, and malware" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Domain dictionary built from scratch across 8 entity categories, used to bootstrap BIO labeling</span>
+      </div>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>F1 65% → 90%</span><span>50,000+ articles</span></div>
+    <div class="detail-stats">
+      <span>Micro avg F1: 67% → 91%</span>
+      <span>Macro avg F1: 56% → 80%</span>
+      <span>Weighted avg F1: 65% → 91%</span>
+    </div>
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/cyber-threat-ner/result-f1-before-after.png" alt="Per-entity precision, recall, and F1 score before and after cleaning mislabeled training data">
+        <span class="proof-caption">Per-entity precision/recall/F1, before (left) and after (right) cleaning mislabeled training data</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">The biggest single jump came from classes that were badly mislabeled early on. MALWARE went from an F1 of 0.18 to 0.88 and IP from 0.20 to 0.72 once the training labels were actually correct, a bigger gain than any change to the model itself produced.</p>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>BERT-NER</span><span>BIO Tagging</span><span>PyTorch</span></div>
+    <div class="detail-stack"><span>BERT-NER</span><span>BIO Tagging</span><span>PyTorch</span><span>MySQL</span><span>Python Crawlers</span></div>
   </div>
 
   <div class="section-block">
-    <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>BIO-tagged annotation example<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>F1 improvement over iterations<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Good text preprocessing moves the needle more than model tuning</div>
+          <div class="pub-venue">Cleaning up the text and fixing mislabeled training data drove most of the F1 gain, more than any architecture or hyperparameter change did.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Labeling is the real time sink, not modeling</div>
+          <div class="pub-venue">Manually annotating BIO tags across 50,000+ articles took far longer than training or tuning the model ever did.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Design crawlers for continuous updates, not a one-time pull</div>
+          <div class="pub-venue">Building for a single scrape is the easy path, but a crawler that can't cleanly re-run to pick up only newly published articles turns into throwaway code fast.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">A visible countdown timer keeps meetings from running long</div>
+          <div class="pub-venue">Borrowed the practice from how Google reportedly runs meetings: put a shared timer on screen with a hard limit, and meetings stop drifting.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Meeting notes need an owner and a status, not just a summary</div>
+          <div class="pub-venue">Every to-do due before the next meeting needs a named owner and a trackable done/not-done state, or it quietly doesn't get done.</div>
+        </div>
+      </div>
+    </div>
   </div>
-  
 
 </div>
 
