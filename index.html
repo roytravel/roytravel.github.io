@@ -50,33 +50,39 @@
       <span class="count">15 of 15 shown</span>
     </div>
 
-    <div class="filter-row">
-      <button class="filter-btn active" data-filter="all">All <span class="fbadge">15</span></button>
-      <button class="filter-btn" data-filter="computer-vision">Computer Vision <span class="fbadge">6</span></button>
-      <button class="filter-btn" data-filter="signal-processing">Signal Processing <span class="fbadge">4</span></button>
-      <button class="filter-btn" data-filter="speech-recognition">Speech Recognition <span class="fbadge">1</span></button>
-      <button class="filter-btn" data-filter="natural-language-processing">NLP <span class="fbadge">1</span></button>
-      <button class="filter-btn" data-filter="machine-learning">Machine Learning <span class="fbadge">3</span></button>
+    <div class="controls-row">
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All <span class="fbadge">15</span></button>
+        <button class="filter-btn" data-filter="computer-vision">Vision <span class="fbadge">6</span></button>
+        <button class="filter-btn" data-filter="signal-processing">Signal <span class="fbadge">4</span></button>
+        <button class="filter-btn" data-filter="speech-recognition">Speech <span class="fbadge">1</span></button>
+        <button class="filter-btn" data-filter="natural-language-processing">NLP <span class="fbadge">1</span></button>
+        <button class="filter-btn" data-filter="machine-learning">ML <span class="fbadge">3</span></button>
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+      </select>
     </div>
 
     <div class="cards">
 
-      <a class="card" data-cat="signal-processing" href="projects/qt-prolongation-onset-prediction.html">
+      <a class="card" data-cat="signal-processing" data-start="2026-06" href="projects/qt-prolongation-onset-prediction.html">
         <div class="card-header">
-          <div class="card-domain">Signal Processing</div>
+          <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
           <div class="card-period">Jun – Jul 2026</div>
         </div>
         <h3>QT Prolongation Onset Prediction</h3>
         <p class="desc">1-/2-/3-day Long QT Syndrome risk model from ECG signals, benchmarking ResNet against a Quantum CNN, tuned as a high-sensitivity rule-out tool.</p>
         <div class="stats"><span>AUROC 0.85</span><span>NPV 0.99</span></div>
-        <div class="stack"><span class="chip">ResNet</span><span class="chip">Quantum CNN</span><span class="chip">Signal Processing</span></div>
+        <div class="stack"><span class="chip">ResNet</span><span class="chip">Quantum CNN</span><span class="chip">Signal</span></div>
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="signal-processing" href="projects/tachycardia-bradycardia-syndrome-detection.html">
+      <a class="card" data-cat="signal-processing" data-start="2026-02" href="projects/tachycardia-bradycardia-syndrome-detection.html">
         <div class="card-header">
-          <div class="card-domain">Signal Processing</div>
+          <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
           <div class="card-period">Feb 2026</div>
         </div>
@@ -87,9 +93,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="signal-processing" href="projects/multi-disease-screening-wearable-ecg.html">
+      <a class="card" data-cat="signal-processing" data-start="2025-09" href="projects/multi-disease-screening-wearable-ecg.html">
         <div class="card-header">
-          <div class="card-domain">Signal Processing</div>
+          <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
           <div class="card-period">Sep 2025 – Aug 2026</div>
         </div>
@@ -100,9 +106,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="signal-processing" href="projects/14-day-arrhythmia-forecasting.html">
+      <a class="card" data-cat="signal-processing" data-start="2025-07" href="projects/14-day-arrhythmia-forecasting.html">
         <div class="card-header">
-          <div class="card-domain">Signal Processing</div>
+          <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
           <div class="card-period">Jul – Sep 2025</div>
         </div>
@@ -113,9 +119,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="speech-recognition" href="projects/low-latency-clinical-speech-recognition.html">
+      <a class="card" data-cat="speech-recognition" data-start="2025-01" href="projects/low-latency-clinical-speech-recognition.html">
         <div class="card-header">
-          <div class="card-domain">Speech Recognition</div>
+          <div class="card-domain">Speech</div>
           <div class="card-org">Synergy AI</div>
           <div class="card-period">Jan – Jun 2025</div>
         </div>
@@ -126,9 +132,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/3d-facial-mesh-generation-3dfacecam.html">
+      <a class="card" data-cat="computer-vision" data-start="2023-07" href="projects/3d-facial-mesh-generation-3dfacecam.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
           <div class="card-period">Jul 2023 – Feb 2024</div>
         </div>
@@ -139,9 +145,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/automated-golf-swing-editing.html">
+      <a class="card" data-cat="computer-vision" data-start="2023-05" href="projects/automated-golf-swing-editing.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
           <div class="card-period">May – Jul 2023</div>
         </div>
@@ -152,9 +158,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/text-prompted-rotoscoping-plugin.html">
+      <a class="card" data-cat="computer-vision" data-start="2023-05" href="projects/text-prompted-rotoscoping-plugin.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
           <div class="card-period">May – Jul 2023</div>
         </div>
@@ -165,9 +171,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/large-scale-human-action-classification.html">
+      <a class="card" data-cat="computer-vision" data-start="2023-01" href="projects/large-scale-human-action-classification.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
           <div class="card-period">Jan – May 2023</div>
         </div>
@@ -178,9 +184,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/drone-based-dolphin-habitat-protection.html">
+      <a class="card" data-cat="computer-vision" data-start="2023-08" href="projects/drone-based-dolphin-habitat-protection.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">MODULABS</div>
           <div class="card-period">Aug 2023 – Jan 2024</div>
         </div>
@@ -191,9 +197,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="computer-vision" href="projects/fake-face-detection.html">
+      <a class="card" data-cat="computer-vision" data-start="2021-06" href="projects/fake-face-detection.html">
         <div class="card-header">
-          <div class="card-domain">Computer Vision</div>
+          <div class="card-domain">Vision</div>
           <div class="card-org">Korea University</div>
           <div class="card-period">Jun 2021</div>
         </div>
@@ -204,7 +210,7 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="natural-language-processing" href="projects/cyber-threat-intelligence-ner.html">
+      <a class="card" data-cat="natural-language-processing" data-start="2020-01" href="projects/cyber-threat-intelligence-ner.html">
         <div class="card-header">
           <div class="card-domain">NLP</div>
           <div class="card-org">Korea University</div>
@@ -217,9 +223,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="machine-learning" href="projects/insurance-cross-sell-model.html">
+      <a class="card" data-cat="machine-learning" data-start="2024-05" href="projects/insurance-cross-sell-model.html">
         <div class="card-header">
-          <div class="card-domain">Machine Learning</div>
+          <div class="card-domain">ML</div>
           <div class="card-org">Ellexi</div>
           <div class="card-period">May – Oct 2024</div>
         </div>
@@ -230,9 +236,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="machine-learning" href="projects/national-in-vehicle-nids-competition.html">
+      <a class="card" data-cat="machine-learning" data-start="2020-01" href="projects/national-in-vehicle-nids-competition.html">
         <div class="card-header">
-          <div class="card-domain">Machine Learning</div>
+          <div class="card-domain">ML</div>
           <div class="card-org">Korea University</div>
           <div class="card-period">2020</div>
         </div>
@@ -243,9 +249,9 @@
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
-      <a class="card" data-cat="machine-learning" href="projects/mhc-peptide-binding-affinity-prediction.html">
+      <a class="card" data-cat="machine-learning" data-start="2022-04" href="projects/mhc-peptide-binding-affinity-prediction.html">
         <div class="card-header">
-          <div class="card-domain">Machine Learning</div>
+          <div class="card-domain">ML</div>
           <div class="card-org">Personal</div>
           <div class="card-period">Apr – May 2022</div>
         </div>
@@ -384,7 +390,7 @@
         <p>I lean generalist by design. Before AI was in my job title, I taught myself immunology and drug discovery from textbooks and primary literature, alone, with no LLM to lean on. That project turned into a PhD offer from a structural biology professor in Boston and a win at a national <a class="hl" href="projects/mhc-peptide-binding-affinity-prediction.html">AI drug discovery competition</a>. The habit stuck: I still learn a new domain top-down, starting from the target task and working backward into whatever I need to know to hit it.</p>
         <div class="facts">
           <div class="fact"><span>Base</span><span>Seoul, South Korea</span></div>
-          <div class="fact"><span>Focus</span><span>Signal Processing · Speech · Computer Vision · NLP</span></div>
+          <div class="fact"><span>Focus</span><span>Signal · Speech · Vision · NLP</span></div>
           <div class="fact"><span>Education</span><span>M.S. Cybersecurity, Korea University</span></div>
           <div class="fact"><span>Currently</span><span>Lead AI Research Engineer, Synergy AI</span></div>
           <div class="fact"><span>Contact</span><span>roytravel97@gmail.com</span></div>
@@ -412,9 +418,12 @@
 <script>
 (function(){
   var btns = document.querySelectorAll('.filter-btn');
+  var cardsWrap = document.querySelector('.cards');
   var cards = document.querySelectorAll('.card');
   var countEl = document.querySelector('.count');
+  var sortSelect = document.getElementById('sortSelect');
   var total = cards.length;
+
   btns.forEach(function(btn){
     btn.addEventListener('click', function(){
       btns.forEach(function(b){ b.classList.remove('active'); });
@@ -428,6 +437,14 @@
       });
       countEl.textContent = shown + ' of ' + total + ' shown';
     });
+  });
+
+  sortSelect.addEventListener('change', function(){
+    var sorted = Array.prototype.slice.call(cards).sort(function(a, b){
+      var da = a.dataset.start, db = b.dataset.start;
+      return sortSelect.value === 'oldest' ? da.localeCompare(db) : db.localeCompare(da);
+    });
+    sorted.forEach(function(c){ cardsWrap.appendChild(c); });
   });
 })();
 </script>

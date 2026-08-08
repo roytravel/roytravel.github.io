@@ -311,7 +311,14 @@ footer{ padding: 52px 28px 48px; }
 }
 
 /* ---------- FILTER ---------- */
-.filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+.controls-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:28px; }
+.filter-row{ display:flex; gap:8px; flex-wrap:wrap; }
+.sort-select{
+  font-family:'Manrope',sans-serif; font-weight:600; font-size:12.5px;
+  padding:8px 16px; border-radius:100px; border:none; cursor:pointer;
+  background:#fff; color:var(--ink); box-shadow:var(--shadow-sm);
+}
+.sort-select:hover{ box-shadow:var(--shadow-md); }
 .filter-btn{
   font-family:'Manrope',sans-serif; font-weight:600; font-size:12.5px;
   padding:8px 16px; border-radius:100px; border:none; cursor:pointer;
