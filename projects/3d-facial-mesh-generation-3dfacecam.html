@@ -81,8 +81,11 @@
         <div style="overflow-x:auto; padding:6px 0;">
           $$diversity = \frac{2}{n(n-1)m} \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \sum_{k=1}^{m} \left\lVert x_i^{(k)} - x_j^{(k)} \right\rVert_2$$
         </div>
-        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:4px;">
-          n = number of generated meshes &middot; m = vertices per mesh &middot; x<sub>i</sub>, x<sub>j</sub> = generated meshes i and j &middot; x<sub>i</sub><sup>(k)</sup> = k-th vertex of mesh i
+        <div style="font-size:12.5px; color:var(--muted); line-height:2; margin-top:4px; display:flex; flex-direction:column;">
+          <span><i>n</i> — number of generated meshes</span>
+          <span><i>m</i> — number of vertices per mesh</span>
+          <span><i>x<sub>i</sub></i>, <i>x<sub>j</sub></i> — generated meshes <i>i</i> and <i>j</i></span>
+          <span><i>x<sub>i</sub><sup>(k)</sup></i> — the <i>k</i>-th vertex of mesh <i>i</i></span>
         </div>
         <p style="font-size:13px; color:var(--muted); margin-top:10px;">Averages the vertex-wise distance between every pair of generated meshes. Higher means the model produces a wider range of shapes instead of collapsing toward one generic face.</p>
       </div>
@@ -92,8 +95,11 @@
         <div style="overflow-x:auto; padding:6px 0;">
           $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i, \quad specificity = \frac{1}{nm} \sum_{j=1}^{n} \sum_{k=1}^{m} \left\lVert \bar{x}^{(k)} - x_j^{(k)} \right\rVert_2$$
         </div>
-        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:4px;">
-          x&#772; = mean mesh across the training dataset &middot; x<sub>j</sub> = generated mesh j &middot; n = number of meshes &middot; m = vertices per mesh
+        <div style="font-size:12.5px; color:var(--muted); line-height:2; margin-top:4px; display:flex; flex-direction:column;">
+          <span><i>x&#772;</i> — mean mesh across the training dataset</span>
+          <span><i>x<sub>j</sub></i> — generated mesh <i>j</i></span>
+          <span><i>n</i> — number of meshes</span>
+          <span><i>m</i> — number of vertices per mesh</span>
         </div>
         <p style="font-size:13px; color:var(--muted); margin-top:10px;">Averages the vertex-wise distance between each generated mesh and the training set's mean face. Lower means outputs stay anatomically realistic instead of drifting into distorted geometry.</p>
       </div>
