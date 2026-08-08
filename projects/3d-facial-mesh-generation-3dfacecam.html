@@ -61,8 +61,8 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>This national R&amp;D project, commissioned by Korea's National Information Society Agency (NIA), built and validated a dataset of Korean face 3D meshes annotated with emotional expression scenarios — for public release on AI-HUB. The core problem: existing 3D face datasets were dominated by non-Korean subjects, and the available Korean-face data lacked verified expression quality.</p>
-    <p>The validation model takes a Korean sentence describing a social situation, classifies the implied emotion with BERT, and generates the corresponding 3D facial mesh using 3DFaceCAM — a GAN-based architecture combining a Stacked Autoencoder for identity/expression disentanglement with a cGAN for mesh and texture generation. I wrote the technical R&amp;D proposal that won the project, trained the model on 4× A100 80GB GPUs, and built the Docker-based evaluation pipeline used for official TTA certification.</p>
+    <p>A third-party organization built a Korean face 3D mesh dataset covering 2,500 subjects with 51 expression variations each — 127,500 meshes in total — for public release on AI-HUB. Ellexi's role was to validate whether that dataset was actually usable: build a model that generates 3D facial meshes from emotional context, and certify it through an official TTA reproducibility audit.</p>
+    <p>The validation model takes a Korean sentence describing a social situation, classifies the implied emotion with BERT, and generates the matching 3D facial mesh using 3DFaceCAM — a two-stage architecture combining a Stacked Autoencoder for identity/expression disentanglement with a cGAN for mesh and texture synthesis. A key constraint: the dataset had been built with camera calibration rather than laser scanning, which meant vertex correspondence across subjects was not guaranteed. To work around this, the model had to be trained per subject. I wrote the R&amp;D proposal that won the project, ran training on 4× A100 80GB GPUs, and built the Docker evaluation pipeline used for official TTA certification — hitting Diversity ≥ 1.3 and Specificity ≤ 0.90.</p>
   </div>
 
   <div class="section-block">
@@ -92,57 +92,54 @@
     <h2>Proof of work</h2>
     <div class="proof-grid">
 
-      <!-- Dataset: shape + textured mesh -->
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
-        <img src="../assets/projects/facial-mesh/dataset-mesh-shape.png" alt="3D mesh shape — Korean face" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        <span class="proof-caption">3D mesh — shape only (laser-scanned Korean face)</span>
-      </div>
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
-        <img src="../assets/projects/facial-mesh/dataset-mesh-textured.png" alt="3D mesh with texture applied" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        <span class="proof-caption">3D mesh — texture applied</span>
-      </div>
-
-      <!-- UV texture map + MTL format -->
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
-        <img src="../assets/projects/facial-mesh/dataset-mesh-texture-uv.jpg" alt="UV texture map" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        <span class="proof-caption">UV texture map used for mesh rendering</span>
-      </div>
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
-        <img src="../assets/projects/facial-mesh/dataset-mesh-mtl.png" alt="MTL material file format" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        <span class="proof-caption">MTL material file — mesh data format</span>
+      <!-- Dataset: shape + textured + UV — 3 columns -->
+      <div style="grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+        <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
+          <img src="../assets/projects/facial-mesh/dataset-mesh-shape.png" alt="Korean face 3D mesh — shape only" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+          <span class="proof-caption">Korean face 3D mesh — shape</span>
+        </div>
+        <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
+          <img src="../assets/projects/facial-mesh/dataset-mesh-textured.png" alt="Korean face 3D mesh — texture applied" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+          <span class="proof-caption">Korean face 3D mesh — texture applied</span>
+        </div>
+        <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
+          <img src="../assets/projects/facial-mesh/dataset-mesh-texture-uv.jpg" alt="UV texture map for mesh rendering" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+          <span class="proof-caption">UV texture map</span>
+        </div>
       </div>
 
-      <!-- Dataset annotation JSON: full width -->
+      <!-- Dataset annotation JSON + Inference CLI: stacked full-width -->
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/facial-mesh/dataset-annotation-json.png" alt="Dataset annotation JSON structure">
         <span class="proof-caption">Dataset annotation schema — expression scenario, AU label, image caption per subject</span>
       </div>
-
-      <!-- Expression demos: 3 short clips -->
-      <div class="proof-tile proof-tile--video">
-        <video controls preload="none" playsinline>
-          <source src="../assets/projects/facial-mesh/demo-expression-smile.mp4" type="video/mp4">
-        </video>
-        <span class="proof-caption">Expression: smile</span>
-      </div>
-      <div class="proof-tile proof-tile--video">
-        <video controls preload="none" playsinline>
-          <source src="../assets/projects/facial-mesh/demo-expression-mouth-stretch.mp4" type="video/mp4">
-        </video>
-        <span class="proof-caption">Expression: mouth stretch</span>
-      </div>
-      <div class="proof-tile proof-tile--video proof-tile--full">
-        <video controls preload="none" playsinline>
-          <source src="../assets/projects/facial-mesh/demo-expression-brow-lower.mp4" type="video/mp4">
-        </video>
-        <span class="proof-caption">Expression: brow lower</span>
-      </div>
-
-      <!-- Inference CLI output: full width -->
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/facial-mesh/result-inference-cli.png" alt="Inference CLI: Korean sentences mapped to expression labels">
         <span class="proof-caption">Inference output — Korean situational sentences classified to expression labels (e.g., "aha moment", "full agreement")</span>
       </div>
+
+      <!-- Expression demos: 3 columns — FaceScape reference outputs, not this project's results -->
+      <div style="grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline>
+            <source src="../assets/projects/facial-mesh/demo-expression-smile.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Smile</span>
+        </div>
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline>
+            <source src="../assets/projects/facial-mesh/demo-expression-mouth-stretch.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Mouth stretch</span>
+        </div>
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline>
+            <source src="../assets/projects/facial-mesh/demo-expression-brow-lower.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Brow lower</span>
+        </div>
+      </div>
+      <p style="grid-column:1/-1; font-size:13px; color:var(--muted); margin-top:-4px;">Target expression outputs — from FaceScape dataset trained on a separate model, shown as the intended output format for this project.</p>
 
       <!-- FaceScape benchmark: full width -->
       <div class="proof-tile proof-tile--img proof-tile--full">
@@ -158,14 +155,8 @@
     <div class="pub-list">
       <div class="pub-item" style="grid-template-columns:1fr;">
         <div class="pub-body">
-          <div class="pub-title">3D mesh datasets require laser-based scanners, not camera calibration</div>
-          <div class="pub-venue">Camera-calibration-based mesh reconstruction looks plausible but doesn't produce geometry clean enough for model training. Laser scanning is not optional.</div>
-        </div>
-      </div>
-      <div class="pub-item" style="grid-template-columns:1fr;">
-        <div class="pub-body">
-          <div class="pub-title">Mesh generation training requires correspondence across all samples</div>
-          <div class="pub-venue">Without consistent vertex correspondence across subjects and expressions, the model has no stable target to learn from. Getting this right is a prerequisite, not a detail.</div>
+          <div class="pub-title">Camera-calibration meshes break vertex correspondence, which breaks GAN training</div>
+          <div class="pub-venue">The dataset was built by another company using camera calibration rather than laser scanning. Camera-calibration meshes don't share vertex topology across subjects, so there's no consistent correspondence for the model to learn from. The only workaround was training a separate model per subject — 2,500 subjects, 51 expressions each. Laser-scanned meshes solve this by construction.</div>
         </div>
       </div>
       <div class="pub-item" style="grid-template-columns:1fr;">
