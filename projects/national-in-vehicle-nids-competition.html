@@ -26,7 +26,7 @@
 <div class="detail-hero">
   <a class="back-link" href="../index.html#work">&larr; Back to all work</a>
   <div class="detail-block">
-    <div class="detail-tag">Security · Korea University · with IITP</div>
+    <div class="detail-tag">Security · Korea University · K-Cyber Security Challenge (MSIT / IITP)</div>
     <h1>National In-Vehicle N-IDS Competition</h1>
     <div class="detail-meta"><span><b>Korea University · Apr 2020 – Dec 2020</b></span></div>
   </div>
@@ -35,37 +35,107 @@
 <div class="detail-body">
 
   <div class="section-block">
-    <h2>Overview</h2>
-    <p>With autonomous vehicles came a new attack surface: the CAN bus. I organized a nationwide competition to spur research on in-vehicle network intrusion detection, funded by Korea's IITP.</p>
-    <p>I generated the attack/defense datasets by analyzing CAN protocol structure and injecting attack packets in Python, evaluated the anomaly-detection submissions from qualifying and final-round teams, then co-authored the resulting paper and published the dataset publicly.</p>
-  </div>
-
-  <div class="section-block">
-    <h2>Results</h2>
-    <div class="detail-stats"><span>NDSS Workshop (AutoSec)</span><span>IEEE DataPort</span></div>
-  </div>
-
-  <div class="section-block">
-    <h2>Stack</h2>
-    <div class="detail-stack"><span>CAN Protocol</span><span>Anomaly Detection</span></div>
-  </div>
-
-  <div class="section-block">
-    <h2>Proof of work</h2>
     <div class="proof-grid">
       <div class="proof-tile proof-tile--video proof-tile--full">
         <video controls preload="metadata">
           <source src="../assets/projects/nids-competition/demo-car-hacking.mp4" type="video/mp4">
         </video>
       </div>
-      <div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>CAN attack injection setup<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div>
-      <div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Competition submission evaluation results<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div>
     </div>
   </div>
-  
+
+  <div class="section-block">
+    <h2>Overview</h2>
+    <p>The Car Hacking Attack &amp; Defense track of Korea's K-Cyber Security Challenge 2020, run under the Ministry of Science and ICT (MSIT) via IITP. Teams competed to attack and defend the CAN bus of a real commercial vehicle (a Hyundai Avante CN7) at the same time, in the same round, which made it one of the first competitions to test attack and detection skills concurrently on live hardware rather than a simulator.</p>
+    <p>I was part of the six-person organizing team from Korea University's School of Cybersecurity. My specific role: build the attack/defense datasets by physically tapping the vehicle's C-CAN bus and injecting attack traffic in Python, then evaluate every qualifying and final-round team's submission for correctness with an F1-score pipeline I wrote.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>The competition</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/nids-competition/event-msit-cyber-security-challenge-2020.png" alt="K-Cyber Security Challenge 2020 event branding" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">K-Cyber Security Challenge 2020 — AI Security division</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/nids-competition/event-car-hacking-track-poster.png" alt="Car Hacking Attack and Defense track poster" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Car Hacking Attack &amp; Defense track — hosted by MSIT, run by IITP, operated with KISA and Korea University</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">The top team could receive up to ₩800M (max ₩1.6B over 2 years) in follow-up national R&amp;D funding plus the Minister's Award, with runners-up receiving the IITP Director's Award. Real government funding rode on the results, which is exactly why the integrity of the dataset and the fairness of the scoring pipeline mattered.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Building the dataset</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/nids-competition/diagram-can-bus-data-injection.png" alt="Physically tapping the vehicle's C-CAN High/Low wires and injecting traffic with Python">
+        <span class="proof-caption">Tapped the vehicle's C-CAN High/Low wires directly, then injected and extracted traffic with a Python pipeline</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/nids-competition/example-can-dataset-rows.png" alt="Sample rows from the generated CAN dataset: Timestamp, Arbitration_ID, DLC, Data, Class, SubClass">
+        <span class="proof-caption">Resulting dataset — timestamped CAN frames labeled by Class and SubClass (normal vs. one of four attack types)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Dataset scale</h2>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Round</th><th>Set</th><th>Labels</th><th># Normal</th><th># Attack</th><th># Rows</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Qualifiers</td><td>Training</td><td>1 normal + 4 attack classes, labeled</td><td>3,372,743</td><td>299,408</td><td>3,672,151</td></tr>
+          <tr><td>Qualifiers</td><td>Submission</td><td>Unlabeled</td><td>3,358,210</td><td>393,836</td><td>3,752,046</td></tr>
+          <tr><td>Finals</td><td>Submission</td><td>Unlabeled</td><td>1,090,312</td><td>179,998</td><td>1,270,310</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Evaluating submissions</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/nids-competition/result-f1-score-evaluation.png" alt="F1 score calculator comparing each team's submitted classifications against ground truth">
+        <span class="proof-caption">Scored every team's submission against ground truth, treating unanswered rows as an incorrect "Attack" guess rather than skipping them</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">Missing predictions could have been dropped from scoring, which would have let a team improve their F1 score just by submitting fewer answers. I defaulted every unanswered row to a wrong guess instead, so the score only rewarded teams that actually classified the traffic.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Results</h2>
+    <div class="detail-stats">
+      <span>Paper · 104 citations</span>
+      <span>Dataset (IEEE DataPort) · 78 citations</span>
+      <span>~8.7M CAN packets generated</span>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Stack</h2>
+    <div class="detail-stack"><span>CAN Protocol</span><span>Python</span><span>Anomaly Detection</span><span>F1 Evaluation</span></div>
+  </div>
+
   <div class="section-block">
     <h2>Reference</h2>
-    <div class="paper-links"><a class="paper-link" href="https://www.ndss-symposium.org/wp-content/uploads/autosec2021_23035_paper.pdf" target="_blank" rel="noopener"><span>Read the paper — NDSS Workshop (AutoSec)</span><span class="src">NDSS Symposium ↗</span></a><a class="paper-link" href="https://ieee-dataport.org/open-access/car-hacking-attack-defense-challenge-2020-dataset" target="_blank" rel="noopener"><span>Dataset — Car Hacking: Attack & Defense Challenge 2020</span><span class="src">IEEE DataPort ↗</span></a></div>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/nids-competition/research-paper-cover.png" alt="Car Hacking and Defense Competition on In-Vehicle Network, paper cover" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+        <span class="proof-caption">"Car Hacking and Defense Competition on In-Vehicle Network" — Kang, Kwak, Lee, Lee, Lee, Kim</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/nids-competition/result-ieee-dataport-listing.png" alt="Car Hacking: Attack & Defense Challenge 2020 Dataset listing on IEEE DataPort" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+        <span class="proof-caption">Dataset listing on IEEE DataPort</span>
+      </div>
+    </div>
+    <div class="paper-links" style="margin-top:16px;">
+      <a class="paper-link" href="https://www.ndss-symposium.org/wp-content/uploads/autosec2021_23035_paper.pdf" target="_blank" rel="noopener"><span>Read the paper — NDSS Workshop (AutoSec)</span><span class="src">NDSS Symposium ↗</span></a>
+      <a class="paper-link" href="https://ieee-dataport.org/open-access/car-hacking-attack-defense-challenge-2020-dataset" target="_blank" rel="noopener"><span>Dataset — Car Hacking: Attack &amp; Defense Challenge 2020</span><span class="src">IEEE DataPort ↗</span></a>
+    </div>
   </div>
 
 </div>
