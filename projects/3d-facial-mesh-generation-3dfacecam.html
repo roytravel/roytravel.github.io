@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3D Facial Mesh Generation (3DFaceCAM) — Haneol Lee</title>
+<title>Korean Face 3D Mesh Expression Validation Model — Haneol Lee</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
@@ -26,36 +26,168 @@
 <div class="detail-hero">
   <a class="back-link" href="../index.html#work">&larr; Back to all work</a>
   <div class="detail-block">
-    <div class="detail-tag">Computer Vision · Ellexi · National R&D</div>
-    <h1>3D Facial Mesh Generation (3DFaceCAM)</h1>
-    <div class="detail-meta"><span><b>Ellexi · Jul 2023 – Feb 2024 · with NIA</b></span></div>
+    <div class="detail-tag">Computer Vision · Ellexi · National R&amp;D with NIA</div>
+    <h1>Korean Face 3D Mesh Expression Validation Model</h1>
+    <div class="detail-meta"><span><b>Ellexi · Jul 2023 – Feb 2024 · 8 months</b></span></div>
   </div>
 </div>
 
 <div class="detail-body">
 
+  <!-- Demo video -->
+  <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/facial-mesh/demo-facial-mesh-poster.jpg">
+          <source src="../assets/projects/facial-mesh/demo-facial-mesh-web.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture diagrams -->
+  <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/arch-system-pipeline.png" alt="System pipeline: 3DFaceCAM training and inference">
+        <span class="proof-caption">System pipeline — sentence classification (BERT) + mesh generation (3DFaceCAM), Training and Inference phases</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/arch-3dfacecam-model.jpg" alt="3DFaceCAM model architecture: SAE + cGAN">
+        <span class="proof-caption">3DFaceCAM architecture — Step I: Stacked Autoencoder (SAE) for identity/expression disentanglement; Step II: cGAN for mesh and texture generation</span>
+      </div>
+    </div>
+  </div>
+
   <div class="section-block">
     <h2>Overview</h2>
-    <p>This national R&D project, in partnership with Korea's National Information Society Agency (NIA), trained a 3D facial mesh generation model on Korean faces for public release on AI-HUB — filling a gap in Korean-specific 3D face datasets available for research.</p>
-    <p>I wrote the technical R&D proposal that won the project, trained 3DFaceCAM on 4× A100 80GB GPUs, and built the Docker-based evaluation pipeline used for official TTA certification, reaching a Diversity score of 1.33 and Specificity of 0.90.</p>
+    <p>This national R&amp;D project, commissioned by Korea's National Information Society Agency (NIA), built and validated a dataset of Korean face 3D meshes annotated with emotional expression scenarios — for public release on AI-HUB. The core problem: existing 3D face datasets were dominated by non-Korean subjects, and the available Korean-face data lacked verified expression quality.</p>
+    <p>The validation model takes a Korean sentence describing a social situation, classifies the implied emotion with BERT, and generates the corresponding 3D facial mesh using 3DFaceCAM — a GAN-based architecture combining a Stacked Autoencoder for identity/expression disentanglement with a cGAN for mesh and texture generation. I wrote the technical R&amp;D proposal that won the project, trained the model on 4× A100 80GB GPUs, and built the Docker-based evaluation pipeline used for official TTA certification.</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>Diversity 1.33</span><span>Specificity 0.90</span><span>4× A100 80GB</span></div>
+    <div class="detail-stats">
+      <span>Diversity 1.33</span>
+      <span>Specificity 0.90</span>
+      <span>4× A100 80GB</span>
+      <span>Dataset published on AI-HUB</span>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>3DFaceCAM</span><span>Docker</span><span>Multi-GPU Training</span></div>
+    <div class="detail-stack">
+      <span>3DFaceCAM</span>
+      <span>cGAN</span>
+      <span>BERT</span>
+      <span>PyTorch</span>
+      <span>Docker</span>
+      <span>Multi-GPU Training</span>
+      <span>FaceScape</span>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Sample generated 3D face meshes<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Distributed training setup diagram<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <div class="proof-grid">
+
+      <!-- Dataset: shape + textured mesh -->
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/facial-mesh/dataset-mesh-shape.png" alt="3D mesh shape — Korean face" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">3D mesh — shape only (laser-scanned Korean face)</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/facial-mesh/dataset-mesh-textured.png" alt="3D mesh with texture applied" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">3D mesh — texture applied</span>
+      </div>
+
+      <!-- UV texture map + MTL format -->
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/facial-mesh/dataset-mesh-texture-uv.jpg" alt="UV texture map" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">UV texture map used for mesh rendering</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/facial-mesh/dataset-mesh-mtl.png" alt="MTL material file format" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">MTL material file — mesh data format</span>
+      </div>
+
+      <!-- Dataset annotation JSON: full width -->
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/dataset-annotation-json.png" alt="Dataset annotation JSON structure">
+        <span class="proof-caption">Dataset annotation schema — expression scenario, AU label, image caption per subject</span>
+      </div>
+
+      <!-- Expression demos: 3 short clips -->
+      <div class="proof-tile proof-tile--video">
+        <video controls preload="none" playsinline>
+          <source src="../assets/projects/facial-mesh/demo-expression-smile.mp4" type="video/mp4">
+        </video>
+        <span class="proof-caption">Expression: smile</span>
+      </div>
+      <div class="proof-tile proof-tile--video">
+        <video controls preload="none" playsinline>
+          <source src="../assets/projects/facial-mesh/demo-expression-mouth-stretch.mp4" type="video/mp4">
+        </video>
+        <span class="proof-caption">Expression: mouth stretch</span>
+      </div>
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline>
+          <source src="../assets/projects/facial-mesh/demo-expression-brow-lower.mp4" type="video/mp4">
+        </video>
+        <span class="proof-caption">Expression: brow lower</span>
+      </div>
+
+      <!-- Inference CLI output: full width -->
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/result-inference-cli.png" alt="Inference CLI: Korean sentences mapped to expression labels">
+        <span class="proof-caption">Inference output — Korean situational sentences classified to expression labels (e.g., "aha moment", "full agreement")</span>
+      </div>
+
+      <!-- FaceScape benchmark: full width -->
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/benchmark-facescape.png" alt="FaceScape benchmark dataset used for comparison">
+        <span class="proof-caption">FaceScape — benchmark dataset used for Diversity and Specificity evaluation</span>
+      </div>
+
+    </div>
   </div>
-  
+
+  <div class="section-block">
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">3D mesh datasets require laser-based scanners, not camera calibration</div>
+          <div class="pub-venue">Camera-calibration-based mesh reconstruction looks plausible but doesn't produce geometry clean enough for model training. Laser scanning is not optional.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Mesh generation training requires correspondence across all samples</div>
+          <div class="pub-venue">Without consistent vertex correspondence across subjects and expressions, the model has no stable target to learn from. Getting this right is a prerequisite, not a detail.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">GAN loss curves don't tell you if training is working</div>
+          <div class="pub-venue">Generator and discriminator losses can look stable while the model is producing garbage. The only way to know is to inspect intermediate outputs throughout training.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Read open-source code critically — even from large organizations</div>
+          <div class="pub-venue">Meta's published implementation had logic errors. Assuming that widely-cited code is correct is a fast way to lose weeks of debugging time.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Papers rarely release everything — plan to implement the gaps yourself</div>
+          <div class="pub-venue">Key components are often missing from public repositories. Treat any research implementation as incomplete until you've verified each piece exists and works.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
