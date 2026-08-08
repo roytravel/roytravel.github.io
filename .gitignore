@@ -1,5 +1,6 @@
 .idea
 .DS_Store
+CLAUDE.md
 .sass-cache
 Gemfile.lock
 package-json.lock
