@@ -76,7 +76,7 @@
       </div>
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/mhc-peptide/research-hla-a3-peptide-structure.png" alt="Crystal structure of HLA-A3 with a bound 9-mer peptide, showing residues P1 through P9 anchored in the MHC groove">
-        <span class="proof-caption">A 9-mer peptide (P1–P9) sitting in the groove formed by an MHC molecule's two alpha helices. Whether a given peptide binds tightly enough to trigger an immune response is exactly what the model predicts.</span>
+        <span class="proof-caption">A 9-mer peptide (P1–P9) in the MHC groove — this is the fit the model predicts</span>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
     <div class="proof-grid">
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/mhc-peptide/research-benchmark-datasets-table.png" alt="Table of benchmark datasets for evaluating pan-specific MHC-peptide binding methods, including Zhang, Hoof, Peters, Nielsen, and DFRMLI datasets">
-        <span class="proof-caption">A decade-plus of accumulated peptide binding and MHC ligand data across public benchmark sets, the raw material that made a computational approach possible in the first place</span>
+        <span class="proof-caption">A decade-plus of accumulated peptide binding and MHC ligand data, the raw material for a computational approach</span>
       </div>
     </div>
     <p style="margin-top:14px;">None of this was learnable from a handful of wet-lab measurements. It took years of MHC-peptide immune response data accumulating across labs, consolidated into benchmark sets like these, before there was enough signal for a computational, in-silico approach to substitute for running the binding assay in-vitro every time.</p>
@@ -101,7 +101,7 @@
       </div>
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/mhc-peptide/diagram-pan-specific-model.png" alt="Pan-specific model: trained on peptide binding data plus MHC pseudo-sequence contact environment across multiple alleles, generalizes to unseen alleles">
-        <span class="proof-caption">Pan-specific — one model trained across many alleles at once, using each MHC's pseudo-sequence as additional context so it generalizes to alleles it wasn't directly trained on</span>
+        <span class="proof-caption">Pan-specific — one model across many alleles, using each MHC's pseudo-sequence as context</span>
       </div>
     </div>
     <p style="margin-top:14px;">MHC genes are the most polymorphic in the human genome. Training a separate allele-specific model for each one is both time- and cost-consuming, and there will always be rare alleles with too little data to train on directly. A pan-specific model sidesteps that by learning binding as a function of the peptide plus the MHC's own sequence context, so it can still make a reasonable prediction for an allele it has seen little or no direct data for.</p>
@@ -112,7 +112,7 @@
     <div class="proof-grid">
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/mhc-peptide/arch-deepattentionpan-model.png" alt="DeepAttentionPan architecture: peptide and HLA input tensors each pass through Conv1d blocks with attention, stack into a feature tensor, pass through an Extractor CNN Block, then Predictor FC layers output a normalized IC50 value">
-        <span class="proof-caption">Peptide and HLA sequences, each BLOSUM62-encoded, run through parallel CNN + attention branches before being fused and scored</span>
+        <span class="proof-caption">Peptide and HLA sequences, each BLOSUM62-encoded, run through parallel CNN + attention branches before fusion and scoring</span>
       </div>
     </div>
     <p style="margin-top:14px;">Four stages do the actual work:</p>
