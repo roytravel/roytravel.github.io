@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
 <body>
 
@@ -76,22 +77,22 @@
 
     <div style="display:flex; flex-direction:column; gap:14px; margin-top:16px;">
       <div style="background:#fff; border-radius:16px; padding:20px 24px; box-shadow:var(--shadow-sm);">
-        <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink); margin-bottom:8px;">Diversity — how varied the generated meshes are</div>
-        <div style="font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); overflow-x:auto; padding-bottom:4px;">
-          diversity&nbsp;=&nbsp;<sup>2</sup>&frasl;<sub>n(n&minus;1)m</sub>&nbsp;&sum;<sub>i=1</sub><sup>n&minus;1</sup>&nbsp;&sum;<sub>j=i+1</sub><sup>n</sup>&nbsp;&sum;<sub>k=1</sub><sup>m</sup>&nbsp;&Vert;x<sub>i</sub><sup>(k)</sup>&nbsp;&minus;&nbsp;x<sub>j</sub><sup>(k)</sup>&Vert;<sub>2</sub>
+        <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink); margin-bottom:10px;">Diversity — how varied the generated meshes are</div>
+        <div style="overflow-x:auto; padding:6px 0;">
+          $$diversity = \frac{2}{n(n-1)m} \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \sum_{k=1}^{m} \left\lVert x_i^{(k)} - x_j^{(k)} \right\rVert_2$$
         </div>
-        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:6px;">
+        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:4px;">
           n = number of generated meshes &middot; m = vertices per mesh &middot; x<sub>i</sub>, x<sub>j</sub> = generated meshes i and j &middot; x<sub>i</sub><sup>(k)</sup> = k-th vertex of mesh i
         </div>
         <p style="font-size:13px; color:var(--muted); margin-top:10px;">Averages the vertex-wise distance between every pair of generated meshes. Higher means the model produces a wider range of shapes instead of collapsing toward one generic face.</p>
       </div>
 
       <div style="background:#fff; border-radius:16px; padding:20px 24px; box-shadow:var(--shadow-sm);">
-        <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink); margin-bottom:8px;">Specificity — how closely meshes match a real face</div>
-        <div style="font-family:'Inter',sans-serif; font-size:14px; color:var(--ink); overflow-x:auto; padding-bottom:4px;">
-          x&#772;&nbsp;=&nbsp;<sup>1</sup>&frasl;<sub>n</sub>&nbsp;&sum;<sub>i=1</sub><sup>n</sup>&nbsp;x<sub>i</sub>,&nbsp;&nbsp;specificity&nbsp;=&nbsp;<sup>1</sup>&frasl;<sub>nm</sub>&nbsp;&sum;<sub>j=1</sub><sup>n</sup>&nbsp;&sum;<sub>k=1</sub><sup>m</sup>&nbsp;&Vert;x&#772;<sup>(k)</sup>&nbsp;&minus;&nbsp;x<sub>j</sub><sup>(k)</sup>&Vert;<sub>2</sub>
+        <div style="font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink); margin-bottom:10px;">Specificity — how closely meshes match a real face</div>
+        <div style="overflow-x:auto; padding:6px 0;">
+          $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i, \quad specificity = \frac{1}{nm} \sum_{j=1}^{n} \sum_{k=1}^{m} \left\lVert \bar{x}^{(k)} - x_j^{(k)} \right\rVert_2$$
         </div>
-        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:6px;">
+        <div style="font-size:12.5px; color:var(--muted); line-height:1.7; margin-top:4px;">
           x&#772; = mean mesh across the training dataset &middot; x<sub>j</sub> = generated mesh j &middot; n = number of meshes &middot; m = vertices per mesh
         </div>
         <p style="font-size:13px; color:var(--muted); margin-top:10px;">Averages the vertex-wise distance between each generated mesh and the training set's mean face. Lower means outputs stay anatomically realistic instead of drifting into distorted geometry.</p>
@@ -220,6 +221,10 @@
     <span>Open to remote opportunities</span>
   </div>
 </footer>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
 
 </body>
 </html>
