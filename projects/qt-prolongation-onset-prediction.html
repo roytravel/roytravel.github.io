@@ -36,7 +36,7 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Long QT Syndrome is dangerous precisely because it's silent until it isn't — a prolonged QT interval can trigger a fatal arrhythmia with little warning. This project built a short-term risk model that flags onset 1, 2, or 3 days ahead directly from ECG signals.</p>
+    <p>Long QT Syndrome is dangerous precisely because it's silent until it isn't. A prolonged QT interval can trigger a fatal arrhythmia with little warning. This project built a short-term risk model that flags onset 1, 2, or 3 days ahead directly from ECG signals.</p>
     <p>Raw signals were filtered using QTc and heart-rate thresholds, automated-reading-based diagnosis confirmation, and confounder removal, before training. I benchmarked a standard ResNet against a Quantum CNN architecture on the same task, and tuned the final model deliberately as a high-sensitivity rule-out tool — its job is to make sure nothing dangerous slips through, not to make a final diagnosis on its own.</p>
   </div>
 

@@ -37,7 +37,7 @@
   <div class="section-block">
     <h2>Overview</h2>
     <p>Most Holter monitor reports exist only as scanned PDFs — unusable for model training as-is. The first step here was making that data usable: digitizing scanned Holter analysis reports with Tesseract OCR and extracting key-value pairs into structured JSON.</p>
-    <p>From there, I built a clinical labeling pipeline that flags tachycardia episodes from ECG signals using a max RR-interval threshold, while explicitly excluding confounding diagnoses like Sick Sinus Syndrome and Complete AV Block through ICD-code-based filtering — the kind of clinical nuance that keeps a dataset trustworthy.</p>
+    <p>From there, I built a clinical labeling pipeline that flags tachycardia episodes from ECG signals using a max RR-interval threshold, while explicitly excluding confounding diagnoses like Sick Sinus Syndrome and Complete AV Block through ICD-code-based filtering. That kind of clinical nuance is what keeps a dataset trustworthy.</p>
   </div>
 
   <div class="section-block">
