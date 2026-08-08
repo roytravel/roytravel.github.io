@@ -52,8 +52,45 @@
 
   <div class="section-block">
     <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>End-to-end pipeline architecture<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Per-condition AUROC results table<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <p style="margin-bottom:16px;">Screen recordings from the actual training runs. Internal identifiers (server IP, dataset codename) are redacted with black boxes.</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin-bottom:10px;">1. Self-supervised pretraining</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/multi-disease-screening/demo-pretraining-poster.jpg">
+          <source src="../assets/projects/multi-disease-screening/demo-pretraining.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Masked-reconstruction pretraining on raw ECG, distributed across 4 GPUs with DDP.</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">Pretraining result — signal reconstruction</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/result-ecg-reconstruction.png" alt="Reconstructed vs. target ECG Lead I signal, with global and local masked regions highlighted">
+        <span class="proof-caption">Reconstructed (black) vs. target (gray) Lead I signal — the model recovers waveform shape across both globally and locally masked spans</span>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">2. Fine-tuning</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/multi-disease-screening/demo-finetuning-poster.jpg">
+          <source src="../assets/projects/multi-disease-screening/demo-finetuning.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">The pretrained encoder fine-tuned per condition, tracked in MLflow.</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">3. Inference &amp; validation</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/multi-disease-screening/demo-inference-poster.jpg">
+          <source src="../assets/projects/multi-disease-screening/demo-inference.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Running inference across checkpoints and logging AUROC/sensitivity/specificity per condition back to MLflow.</p>
   </div>
   
 
