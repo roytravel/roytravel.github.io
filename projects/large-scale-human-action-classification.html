@@ -41,6 +41,46 @@
   </div>
 
   <div class="section-block">
+    <h2>Dataset</h2>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Interaction type</th><th>Videos (mp4)</th><th>Key frames (jpg)</th><th>Classes</th><th>Size</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2-person</td><td>39,000</td><td>260,000</td><td>50</td><td>~730GB</td></tr>
+          <tr><td>3-person</td><td>29,000</td><td>200,000</td><td>30</td><td>~500GB</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px;">Frames were labeled with a Keypoint R-CNN pipeline that draws the interaction bounding box around each labeled pair or trio, which is what made bulk annotation across 460,000 key frames feasible.</p>
+    <div class="proof-grid" style="margin-top:16px;">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/dataset-keypoint-rcnn-labeling-1.jpg" alt="Keypoint R-CNN labeled bounding box around two people carrying a box together" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/dataset-keypoint-rcnn-labeling-2.jpg" alt="Keypoint R-CNN labeled bounding box around two people exchanging an object" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/dataset-keypoint-rcnn-labeling-3.jpg" alt="Keypoint R-CNN labeled bounding box around two people facing each other" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/dataset-keypoint-rcnn-labeling-4.jpg" alt="Keypoint R-CNN labeled bounding box around two people, one reaching toward the other" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+    </div>
+
+    <p style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink);">2-person classes (sample of 50)</p>
+    <div class="detail-stack" style="margin-top:8px;">
+      <span>Toast</span><span>Fever check</span><span>Arm wrestling</span><span>Two-person three-legged race</span><span>Tickling</span><span>Idol dance</span><span>Fainting</span><span>Metal detector search</span><span>Volleyball</span><span>Escort</span><span>Chicken fight (game)</span><span>Helping a fallen person up</span>
+    </div>
+
+    <p style="margin-top:20px; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; color:var(--ink);">3-person classes (sample of 30)</p>
+    <div class="detail-stack" style="margin-top:8px;">
+      <span>Medal ceremony</span><span>Kickboxing</span><span>Long jump-rope game</span><span>Tug-of-war game</span><span>Rock-paper-scissors game</span><span>Fire evacuation</span><span>Arrest</span><span>Taekwondo sparring</span><span>First aid</span><span>Group exercise (G.X)</span><span>Judo</span><span>Security search</span>
+    </div>
+  </div>
+
+  <div class="section-block">
     <h2>Architecture — YOWO</h2>
     <div class="proof-grid">
       <div class="proof-tile proof-tile--img proof-tile--full">
@@ -73,12 +113,50 @@
         <img src="../assets/projects/human-action/result-map-3person-actions.png" alt="Per-class average precision for 3-person actions, ending in mAP 84.65%" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
         <span class="proof-caption">3-person actions — per-class AP across 30 classes, mAP 84.65%</span>
       </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/result-inference-2person-toast.png" alt="Model correctly detecting a Toast action between two people at 0.8813 confidence" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Inference — "Toast" detected at 0.88 confidence</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/human-action/result-inference-3person-medalceremony.png" alt="Model correctly detecting a Medal Ceremony action among three people at 0.9484 confidence" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Inference — "Medal Ceremony" detected at 0.95 confidence</span>
+      </div>
     </div>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>YOWO</span><span>PyTorch DDP</span><span>1.2TB Video Dataset</span><span>8× GPU (A100/V100)</span><span>Docker</span></div>
+    <div class="detail-stack"><span>YOWO</span><span>PyTorch DDP</span><span>1.2TB Video Dataset</span><span>8× GPU (A100/V100)</span><span>Docker</span><span>Optuna</span></div>
+  </div>
+
+  <div class="section-block">
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Multiprocessing preprocessing cuts that stage's time dramatically</div>
+          <div class="pub-venue">Parallelizing the video preprocessing step across multiple processes, instead of running it single-threaded, was one of the highest-leverage speedups in the whole pipeline.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">FPS choice directly controls whether training time stays tractable</div>
+          <div class="pub-venue">Feeding every frame at full fps inflates the frame count (and training time) fast. Downsampling to an appropriate fps was what kept a 1.2TB video dataset trainable in a reasonable window.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Multi-GPU training cuts wall-clock time, once it's actually configured right</div>
+          <div class="pub-venue">DDP across 8 GPUs only pays off if every GPU stays saturated. Getting that utilization right, not just adding GPUs, is what turned into a real speedup.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Optuna replaces hand-tuning with automated hyperparameter search</div>
+          <div class="pub-venue">Used Optuna to search learning rate, batch size, and other hyperparameters automatically instead of tuning them by hand one at a time.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
