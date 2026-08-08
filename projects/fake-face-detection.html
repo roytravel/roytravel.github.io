@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real and Fake Face Detection — Haneol Lee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav">
+    <div class="m">Haneol Lee</div>
+    <div class="links">
+      <a href="../index.html">Work</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="cv-btn" href="https://www.linkedin.com/in/haneol-lee-6a764319b/" target="_blank" rel="noopener">CV ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="detail-hero">
+  <a class="back-link" href="../index.html#work">&larr; Back to all work</a>
+  <div class="detail-block">
+    <div class="detail-tag">Computer Vision · Korea University · Graduate Coursework</div>
+    <h1>Real and Fake Face Detection</h1>
+    <div class="detail-meta"><span><b>Pattern Recognition (Graduate) · Korea University · Jun 2021</b></span></div>
+  </div>
+</div>
+
+<div class="detail-body">
+
+  <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/fake-face-detection/diagram-task-overview.png" alt="Task overview: filename encodes difficulty, image ID, and a 4-bit manipulation label for left eye, right eye, nose, and mouth">
+        <span class="proof-caption">Each file is labeled with a 4-bit code marking which of 4 regions (left eye, right eye, nose, mouth) was manipulated</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Overview</h2>
+    <p>An assignment from a graduate Pattern Recognition course at Korea University, offered as one of three topic choices. I picked manipulated-face detection: given a face photo, decide whether it's been digitally altered, and if so, which facial region was touched. No pretrained backbone was allowed, so both models were trained from scratch.</p>
+    <p>I built two separate CNNs rather than one multi-task model: a binary classifier that flags whether an image is real or manipulated, and a second model that predicts which of four regions (left eye, right eye, nose, mouth) were altered, output as a 15-way classification over every non-empty combination of the four regions. The dataset wasn't GAN-generated, it was Photoshop-manipulated, which shaped which prior work was actually relevant and which model design to use.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>What a manipulated face looks like</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/fake-face-detection/example-manipulated-face-easy.png" alt="Example manipulated face, easy difficulty" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Easy difficulty — manipulation is subtle even at close inspection</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/fake-face-detection/example-manipulated-face-mid.jpg" alt="Example manipulated face, mid difficulty" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Mid difficulty — visually convincing, hard to flag by eye alone</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">The dataset spans easy, mid, and hard difficulty tiers. Even at mid difficulty, the edits are clean enough that manual review isn't reliable, which is the actual case for automated detection.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Related work</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/fake-face-detection/research-photoshop-manipulation-detection.png" alt="Detecting Photoshopped Faces by Scripting Photoshop, ICCV 2019, found via Papers with Code">
+        <span class="proof-caption">"Detecting Photoshopped Faces by Scripting Photoshop" — Wang et al., ICCV 2019, found via Papers with Code</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">Most SOTA manipulation-detection work targets GAN-generated forgeries. This dataset wasn't GAN-based, so that line of research didn't apply. The Photoshop-scripting paper was a closer match: its dataset was also built from ordinary tools like Adobe Photoshop rather than a generative model, and its two-model split (a global real/fake classifier plus a local region classifier) is exactly the structure I used.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Dataset</h2>
+    <div class="detail-stats">
+      <span>4,080 images total</span>
+      <span>2,040 train / 2,040 test</span>
+      <span>959 manipulated / 1,081 real per split</span>
+    </div>
+    <p style="margin-top:14px;">Manually reviewing the labeled set turned up one image whose filename claimed a manipulation that wasn't actually visible or verifiable. I excluded it rather than trust the label blindly.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Image augmentation</h2>
+    <p style="margin-bottom:14px;">The dataset wasn't large enough to train reliably without augmentation, confirmed by first running both models with none. The two models needed different settings, not the same recipe copy-pasted twice, because they answer different questions about the same faces.</p>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Setting</th><th>Real/fake classifier</th><th>Region localization</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>horizontal_flip</td><td>True</td><td>False</td><td>Flipping would silently swap the ground-truth left-eye/right-eye labels the localization model depends on</td></tr>
+          <tr><td>vertical_flip</td><td>False</td><td>False</td><td>Upside-down faces aren't a realistic input in either case</td></tr>
+          <tr><td>shear_range</td><td>0.2</td><td>0.2</td><td>Standard tilt tolerance</td></tr>
+          <tr><td>zoom_range</td><td>0.2</td><td>0.2</td><td>Standard scale tolerance</td></tr>
+          <tr><td>rescale</td><td>1/255</td><td>1/255</td><td>Normalize pixel values into [0, 1]</td></tr>
+          <tr><td>validation_split</td><td>0.2</td><td>0.2</td><td>80/20 train/validation split</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:var(--muted);">Real/fake classifier: 2,040 train images augmented into 1,633 validation-split images plus 407 held out for testing. Region localization model: 959 manipulated images split into 768 for training and 191 for validation, since it only ever sees images already flagged as manipulated.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Models</h2>
+    <div class="detail-stack">
+      <span>Conv2D ×6</span>
+      <span>MaxPooling2D ×4</span>
+      <span>BatchNormalization ×3</span>
+      <span>Dropout ×2 (localization model)</span>
+      <span>RMSprop</span>
+      <span>TensorFlow / Keras</span>
+    </div>
+    <p style="margin-top:14px;">Both models share the same convolutional backbone (input downsampled to 300×300 for training speed), then diverge into two different heads.</p>
+
+    <div class="arch-branch-label">Shared backbone</div>
+    <div class="arch-flow">
+      <div class="layer">Input<small>300×300×3</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Conv2D ×2<small>32 filters</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">MaxPool2D</div>
+      <div class="arrow">→</div>
+      <div class="layer">Conv2D ×2<small>64 filters</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">MaxPool2D<small>+ BatchNorm</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Conv2D<small>128 filters</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">MaxPool2D<small>+ BatchNorm</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Conv2D<small>256 filters</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">MaxPool2D<small>+ BatchNorm</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Flatten</div>
+      <div class="arrow">→</div>
+      <div class="layer">Dense<small>128, ReLU</small></div>
+    </div>
+
+    <div class="arch-branch-label" style="margin-top:6px;">Real/fake classifier</div>
+    <div class="arch-flow">
+      <div class="layer">Dense 128</div>
+      <div class="arrow">→</div>
+      <div class="layer layer--head">Dense 1<small>sigmoid</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Real / Fake</div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-top:-6px; margin-bottom:14px;">Binary cross-entropy loss · ~11M parameters</p>
+
+    <div class="arch-branch-label">Region localization model</div>
+    <div class="arch-flow">
+      <div class="layer">Dense 128</div>
+      <div class="arrow">→</div>
+      <div class="layer">Dropout<small>0.2 ×2</small></div>
+      <div class="arrow">→</div>
+      <div class="layer layer--head">Dense 15<small>softmax</small></div>
+      <div class="arrow">→</div>
+      <div class="layer">Region label<small>eye / nose / mouth</small></div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-top:-6px;">Categorical cross-entropy loss · 15 classes = every non-empty combination of 4 regions (2⁴ − 1). This model only ever sees images already flagged as manipulated, so "no region manipulated" isn't a valid output.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Building the label set</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/fake-face-detection/result-dataframe-construction.png" alt="Dataframe: filename parsed into left_eye, right_eye, nose, mouth binary columns plus a combined label column">
+        <span class="proof-caption">Parsed the 4-digit code out of each filename into a structured dataframe for the localization model</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">My first attempt treated left_eye, right_eye, nose, and mouth as four separate binary targets. It trained poorly. Collapsing them into one combined categorical label (the <code>label</code> column above, one of 15 classes) instead of four independent outputs fixed it. Framing the four correlated sub-decisions as a single classification target gave the model a much cleaner signal to learn from.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Results</h2>
+    <div class="detail-stats">
+      <span>Real/fake — Acc 98.7%</span>
+      <span>Precision 99.4%</span>
+      <span>Recall 98.0%</span>
+      <span>AUC 99.9%</span>
+      <span>F1 98.7%</span>
+    </div>
+    <div class="detail-stats" style="margin-top:10px;">
+      <span>Region localization — Acc 96.9%</span>
+      <span>Precision 99.0%</span>
+      <span>Recall 94.0%</span>
+      <span>AUC 99.9%</span>
+      <span>F1 97.1%</span>
+    </div>
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/fake-face-detection/result-loc-model-loss.png" alt="Region localization model: train vs validation loss over 60 epochs" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Region localization model — train/validation loss</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/fake-face-detection/result-loc-model-accuracy.png" alt="Region localization model: train vs validation accuracy over 60 epochs" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Region localization model — train/validation accuracy</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Takeaways</h2>
+    <div class="pub-list">
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Collapse correlated sub-labels into one target instead of predicting them independently</div>
+          <div class="pub-venue">Four separate binary heads for four correlated regions trained poorly. One combined 15-way label over the same information trained cleanly.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Don't trust dataset labels blindly, spot-check them</div>
+          <div class="pub-venue">Manually reviewing the labeled images surfaced one filename whose claimed manipulation wasn't actually verifiable. Excluded it rather than train on a bad label.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Augmentation choices should follow the task's semantics, not a default checklist</div>
+          <div class="pub-venue">Horizontal flip is a standard augmentation, but it would have silently swapped the left-eye/right-eye ground truth for the localization model. Skipped it there, kept it for the real/fake classifier where it didn't matter.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Match the reference paper to the actual data generation process, not just the task name</div>
+          <div class="pub-venue">Most manipulation-detection SOTA targets GAN forgeries. This dataset was Photoshop-edited, so a Photoshop-scripting detection paper was the more relevant prior work, even though it's less cited than GAN-detection papers.</div>
+        </div>
+      </div>
+      <div class="pub-item" style="grid-template-columns:1fr;">
+        <div class="pub-body">
+          <div class="pub-title">Textbook layer ordering isn't always the best fit empirically</div>
+          <div class="pub-venue">CS231n's recommended Conv2D → BatchNorm → MaxPool ordering underperformed Conv2D → MaxPool → BatchNorm on this task. Tested both instead of assuming the textbook order would win.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Reference</h2>
+    <div class="download-group">
+      <a class="download-btn" href="../assets/projects/fake-face-detection/report-real-and-fake-face-detection.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+        Full Report (PDF)
+      </a>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-top:12px;">Related work referenced: "Detecting Photoshopped Faces by Scripting Photoshop," Sheng-Yu Wang, Oliver Wang, Andrew Owens, Richard Zhang, Alexei A. Efros — ICCV 2019.</p>
+  </div>
+
+</div>
+
+<footer id="contact">
+  <div class="contact-block">
+    <h2>Let's talk.</h2>
+    <div class="contact-links">
+      <a href="mailto:roytravel97@gmail.com">roytravel97@gmail.com ↗</a>
+      <a href="https://github.com/roytravel" target="_blank" rel="noopener">github.com/roytravel ↗</a>
+      <a href="https://www.linkedin.com/in/haneol-lee-6a764319b/" target="_blank" rel="noopener">linkedin.com/in/haneol-lee ↗</a>
+    </div>
+  </div>
+  <div class="fine">
+    <span>Haneol (Roy) Lee — AI Engineer</span>
+    <span>Open to remote opportunities</span>
+  </div>
+</footer>
+
+</body>
+</html>

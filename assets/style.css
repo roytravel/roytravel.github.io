@@ -207,6 +207,30 @@ footer{ padding: 52px 28px 48px; }
 .proof-tile--full{ grid-column: 1 / -1; }
 .proof-tile--video{ padding:0; border:1.5px solid #E2E8F4; overflow:hidden; aspect-ratio:unset; position:relative; }
 .proof-tile--video video{ width:100%; height:auto; display:block; border-radius:16px; }
+
+/* ---------- DATA TABLE ---------- */
+.data-table{ width:100%; border-collapse:collapse; background:#fff; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-sm); font-size:13px; }
+.data-table th, .data-table td{ padding:11px 16px; text-align:left; border-bottom:1px solid #EEF1F8; }
+.data-table th{ font-family:'Manrope',sans-serif; font-weight:700; font-size:11.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); }
+.data-table td{ color:var(--body); }
+.data-table td:first-child, .data-table th:first-child{ font-weight:600; color:var(--ink); }
+.data-table tr:last-child td{ border-bottom:none; }
+.data-table-wrap{ overflow-x:auto; border-radius:16px; }
+
+/* ---------- ARCHITECTURE FLOW DIAGRAM ---------- */
+.arch-flow{ display:flex; align-items:center; gap:8px; overflow-x:auto; padding:18px 4px; }
+.arch-flow .layer{
+  flex-shrink:0; background:#fff; border-radius:12px; padding:10px 16px;
+  box-shadow:var(--shadow-sm); font-family:'Manrope',sans-serif; font-size:12px; font-weight:700;
+  color:var(--ink); text-align:center; white-space:nowrap;
+}
+.arch-flow .layer small{ display:block; font-weight:500; color:var(--muted); font-size:10.5px; margin-top:2px; }
+.arch-flow .layer--head{ background:var(--accent-soft); color:var(--accent); }
+.arch-flow .arrow{ flex-shrink:0; color:#C7D2E8; font-size:16px; }
+.arch-branch-label{
+  font-family:'Manrope',sans-serif; font-weight:700; font-size:12px; color:var(--accent);
+  margin-bottom:2px;
+}
 .proof-caption{
   position:absolute; bottom:0; left:0; right:0;
   background:linear-gradient(transparent, rgba(15,27,61,0.72));
