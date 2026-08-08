@@ -189,7 +189,7 @@ footer{ padding: 52px 28px 48px; }
   width:100%; height:auto; display:block; border-radius:16px;
 }
 .proof-tile--full{ grid-column: 1 / -1; }
-.proof-tile--video{ padding:0; border:1.5px solid #E2E8F4; overflow:hidden; aspect-ratio:unset; }
+.proof-tile--video{ padding:0; border:1.5px solid #E2E8F4; overflow:hidden; aspect-ratio:unset; position:relative; }
 .proof-tile--video video{ width:100%; height:auto; display:block; border-radius:16px; }
 .proof-caption{
   position:absolute; bottom:0; left:0; right:0;

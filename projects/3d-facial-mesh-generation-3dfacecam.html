@@ -41,6 +41,7 @@
         <video controls preload="none" playsinline poster="../assets/projects/facial-mesh/demo-facial-mesh-poster.jpg">
           <source src="../assets/projects/facial-mesh/demo-facial-mesh-web.mp4" type="video/mp4">
         </video>
+        <span class="proof-caption">Demo — natural language input classified to an expression label, then rendered as a 3D facial mesh</span>
       </div>
     </div>
   </div>
@@ -54,15 +55,15 @@
       </div>
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/facial-mesh/arch-3dfacecam-model.jpg" alt="3DFaceCAM model architecture: SAE + cGAN">
-        <span class="proof-caption">3DFaceCAM architecture — Step I: Stacked Autoencoder (SAE) for identity/expression disentanglement; Step II: cGAN for mesh and texture generation</span>
+        <span class="proof-caption">3DFaceCAM — SAE disentangles identity/expression, then cGAN generates mesh and texture</span>
       </div>
     </div>
   </div>
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>A third-party organization built a Korean face 3D mesh dataset covering 2,500 subjects with 51 expression variations each — 127,500 meshes in total — for public release on AI-HUB. Ellexi's role was to validate whether that dataset was actually usable: build a model that generates 3D facial meshes from emotional context, and certify it through an official TTA reproducibility audit.</p>
-    <p>The validation model takes a Korean sentence describing a social situation, classifies the implied emotion with BERT, and generates the matching 3D facial mesh using 3DFaceCAM — a two-stage architecture combining a Stacked Autoencoder for identity/expression disentanglement with a cGAN for mesh and texture synthesis. A key constraint: the dataset had been built with camera calibration rather than laser scanning, which meant vertex correspondence across subjects was not guaranteed. To work around this, the model had to be trained per subject. I wrote the R&amp;D proposal that won the project, ran training on 4× A100 80GB GPUs, and built the Docker evaluation pipeline used for official TTA certification — hitting Diversity ≥ 1.3 and Specificity ≤ 0.90.</p>
+    <p>A third-party organization built a Korean face 3D mesh dataset covering 2,500 subjects, each with 51 expression variations (127,500 meshes in total), for public release on <a href="https://aihub.or.kr/aihubdata/data/view.do?pageIndex=1&amp;currMenu=115&amp;topMenu=100&amp;srchOptnCnd=OPTNCND001&amp;searchKeyword=%ED%95%9C%EA%B5%AD%EC%9D%B8+%EC%96%BC%EA%B5%B4&amp;srchDetailCnd=DETAILCND001&amp;srchOrder=ORDER001&amp;srchPagePer=20&amp;aihubDataSe=data&amp;dataSetSn=71787" target="_blank" rel="noopener">AI-HUB</a>. Ellexi's role was to validate whether that dataset was actually usable: build a model that generates 3D facial meshes from emotional context, and certify it through an official reproducibility audit by the <a href="https://www.tta.or.kr/tta" target="_blank" rel="noopener">Telecommunications Technology Association (TTA)</a>, Korea's national ICT testing and certification body.</p>
+    <p>The validation model takes a Korean sentence describing a social situation, classifies the implied emotion with BERT, and generates the matching 3D facial mesh using 3DFaceCAM, a two-stage architecture that combines a Stacked Autoencoder for identity/expression disentanglement with a cGAN for mesh and texture synthesis. A key constraint: the dataset had been built with camera calibration rather than laser scanning, which meant vertex correspondence across subjects was not guaranteed. To work around this, the model had to be trained per subject. I wrote the R&amp;D proposal that won the project, ran training on 4× A100 80GB GPUs to handle the scale, and built the Docker evaluation pipeline used for official TTA certification, hitting Diversity ≥ 1.3 and Specificity ≤ 0.90.</p>
   </div>
 
   <div class="section-block">
@@ -70,7 +71,6 @@
     <div class="detail-stats">
       <span>Diversity 1.33</span>
       <span>Specificity 0.90</span>
-      <span>4× A100 80GB</span>
       <span>Dataset published on AI-HUB</span>
     </div>
   </div>
@@ -83,7 +83,7 @@
       <span>BERT</span>
       <span>PyTorch</span>
       <span>Docker</span>
-      <span>Multi-GPU Training</span>
+      <span>4× A100 80GB</span>
       <span>FaceScape</span>
     </div>
   </div>
@@ -92,7 +92,31 @@
     <h2>Proof of work</h2>
     <div class="proof-grid">
 
-      <!-- Dataset: shape + textured + UV — 3 columns -->
+      <!-- Step 1: the goal — reference expression outputs from FaceScape -->
+      <p style="grid-column:1/-1; margin-bottom:-4px;">The goal: generate a specific facial expression mesh, like these reference outputs from the FaceScape benchmark (produced on a separate model, shown here as the target format).</p>
+      <div style="grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline poster="../assets/projects/facial-mesh/demo-expression-smile-poster.jpg">
+            <source src="../assets/projects/facial-mesh/demo-expression-smile.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Smile</span>
+        </div>
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline poster="../assets/projects/facial-mesh/demo-expression-mouth-stretch-poster.jpg">
+            <source src="../assets/projects/facial-mesh/demo-expression-mouth-stretch.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Mouth stretch</span>
+        </div>
+        <div class="proof-tile proof-tile--video">
+          <video controls preload="none" playsinline poster="../assets/projects/facial-mesh/demo-expression-brow-lower-poster.jpg">
+            <source src="../assets/projects/facial-mesh/demo-expression-brow-lower.mp4" type="video/mp4">
+          </video>
+          <span class="proof-caption">Brow lower</span>
+        </div>
+      </div>
+
+      <!-- Step 2: dataset built to reach that goal, benchmarked against FaceScape -->
+      <p style="grid-column:1/-1; margin-bottom:-4px;">To reach that goal, the Korean face dataset was built as shape, textured, and UV-mapped 3D meshes, benchmarked against FaceScape.</p>
       <div style="grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
         <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
           <img src="../assets/projects/facial-mesh/dataset-mesh-shape.png" alt="Korean face 3D mesh — shape only" style="width:100%; height:100%; object-fit:cover; object-position:center;">
@@ -107,44 +131,20 @@
           <span class="proof-caption">UV texture map</span>
         </div>
       </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/facial-mesh/benchmark-facescape.png" alt="FaceScape benchmark dataset used for comparison">
+        <span class="proof-caption">FaceScape — the benchmark dataset used for Diversity and Specificity evaluation</span>
+      </div>
 
-      <!-- Dataset annotation JSON + Inference CLI: stacked full-width -->
+      <!-- Step 3: natural language input drives cGAN expression label selection -->
+      <p style="grid-column:1/-1; margin-bottom:-4px;">The expression label fed into the cGAN is selected from natural language input: a Korean sentence describing a situation. Training data paired each scenario with an expression label, and inference maps a new sentence to that same label.</p>
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/facial-mesh/dataset-annotation-json.png" alt="Dataset annotation JSON structure">
-        <span class="proof-caption">Dataset annotation schema — expression scenario, AU label, image caption per subject</span>
+        <span class="proof-caption">Training data — expression scenario, AU label, and image caption per subject</span>
       </div>
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/facial-mesh/result-inference-cli.png" alt="Inference CLI: Korean sentences mapped to expression labels">
         <span class="proof-caption">Inference output — Korean situational sentences classified to expression labels (e.g., "aha moment", "full agreement")</span>
-      </div>
-
-      <!-- Expression demos: 3 columns — FaceScape reference outputs, not this project's results -->
-      <div style="grid-column:1/-1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
-        <div class="proof-tile proof-tile--video">
-          <video controls preload="none" playsinline>
-            <source src="../assets/projects/facial-mesh/demo-expression-smile.mp4" type="video/mp4">
-          </video>
-          <span class="proof-caption">Smile</span>
-        </div>
-        <div class="proof-tile proof-tile--video">
-          <video controls preload="none" playsinline>
-            <source src="../assets/projects/facial-mesh/demo-expression-mouth-stretch.mp4" type="video/mp4">
-          </video>
-          <span class="proof-caption">Mouth stretch</span>
-        </div>
-        <div class="proof-tile proof-tile--video">
-          <video controls preload="none" playsinline>
-            <source src="../assets/projects/facial-mesh/demo-expression-brow-lower.mp4" type="video/mp4">
-          </video>
-          <span class="proof-caption">Brow lower</span>
-        </div>
-      </div>
-      <p style="grid-column:1/-1; font-size:13px; color:var(--muted); margin-top:-4px;">Target expression outputs — from FaceScape dataset trained on a separate model, shown as the intended output format for this project.</p>
-
-      <!-- FaceScape benchmark: full width -->
-      <div class="proof-tile proof-tile--img proof-tile--full">
-        <img src="../assets/projects/facial-mesh/benchmark-facescape.png" alt="FaceScape benchmark dataset used for comparison">
-        <span class="proof-caption">FaceScape — benchmark dataset used for Diversity and Specificity evaluation</span>
       </div>
 
     </div>
