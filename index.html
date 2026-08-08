@@ -71,7 +71,7 @@
         <div class="card-header">
           <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
-          <div class="card-period">Jun – Jul 2026</div>
+          <div class="card-period">Jun 2026 – Jul 2026</div>
         </div>
         <h3>QT Prolongation Onset Prediction</h3>
         <p class="desc">1-/2-/3-day Long QT Syndrome risk model from ECG signals, benchmarking ResNet against a Quantum CNN, tuned as a high-sensitivity rule-out tool.</p>
@@ -110,7 +110,7 @@
         <div class="card-header">
           <div class="card-domain">Signal</div>
           <div class="card-org">Synergy AI</div>
-          <div class="card-period">Jul – Sep 2025</div>
+          <div class="card-period">Jul 2025 – Sep 2025</div>
         </div>
         <h3>14-Day Arrhythmia Forecasting (27 Types)</h3>
         <p class="desc">Pre-trained and fine-tuned 12-lead ECG foundation models to forecast arrhythmia onset 14 days out, with survival-analysis-based false-positive tracking.</p>
@@ -123,7 +123,7 @@
         <div class="card-header">
           <div class="card-domain">Speech</div>
           <div class="card-org">Synergy AI</div>
-          <div class="card-period">Jan – Jun 2025</div>
+          <div class="card-period">Jan 2025 – Jun 2025</div>
         </div>
         <h3>Low-Latency Clinical Speech Recognition</h3>
         <p class="desc">LoRA fine-tuned Whisper-large-v3 on urology doctor–patient dialogue, quantized and served for the HyperMedicus STT product.</p>
@@ -149,7 +149,7 @@
         <div class="card-header">
           <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
-          <div class="card-period">May – Jul 2023</div>
+          <div class="card-period">May 2023 – Jul 2023</div>
         </div>
         <h3>Automated Golf Swing Editing</h3>
         <p class="desc">YOWO-based model to automatically detect the Setup-to-Impact phase of a golf swing, fusing audio-peak detection with visual localization.</p>
@@ -162,7 +162,7 @@
         <div class="card-header">
           <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
-          <div class="card-period">May – Jul 2023</div>
+          <div class="card-period">May 2023 – Jul 2023</div>
         </div>
         <h3>Text-Prompted Rotoscoping Plugin</h3>
         <p class="desc">FastSAM-based FastAPI server packaged as a Nuke plugin, turning a text prompt into a Bézier-curve rotoscoping mask.</p>
@@ -175,7 +175,7 @@
         <div class="card-header">
           <div class="card-domain">Vision</div>
           <div class="card-org">Ellexi</div>
-          <div class="card-period">Jan – May 2023</div>
+          <div class="card-period">Jan 2023 – May 2023</div>
         </div>
         <h3>Large-Scale Human Action Classification</h3>
         <p class="desc">Trained 2-/3-person action-classification models on a 1.2TB video dataset across 8 GPUs, then Dockerized the pipeline for TTA validation.</p>
@@ -227,7 +227,7 @@
         <div class="card-header">
           <div class="card-domain">ML</div>
           <div class="card-org">Ellexi</div>
-          <div class="card-period">May – Oct 2024</div>
+          <div class="card-period">May 2024 – Oct 2024</div>
         </div>
         <h3>Revenue-Driving Insurance Cross-Sell Model</h3>
         <p class="desc">1,000+ lines of Oracle SQL to build feature tables, then trained XGBoost, LightGBM, and CatBoost to predict cross-sell propensity.</p>
@@ -253,7 +253,7 @@
         <div class="card-header">
           <div class="card-domain">ML</div>
           <div class="card-org">Personal</div>
-          <div class="card-period">Apr – May 2022</div>
+          <div class="card-period">Apr 2022 – May 2022</div>
         </div>
         <h3>MHC–Peptide Binding Affinity Prediction</h3>
         <p class="desc">Self-directed project outside my formal domain: modeled peptide–protein binding to shrink the drug candidate search space.</p>
@@ -439,13 +439,19 @@
     });
   });
 
-  sortSelect.addEventListener('change', function(){
+  function applySort(){
     var sorted = Array.prototype.slice.call(cards).sort(function(a, b){
-      var da = a.dataset.start, db = b.dataset.start;
-      return sortSelect.value === 'oldest' ? da.localeCompare(db) : db.localeCompare(da);
+      var da = a.getAttribute('data-start') || '';
+      var db = b.getAttribute('data-start') || '';
+      if(da === db) return 0;
+      var newerFirst = da > db ? -1 : 1;
+      return sortSelect.value === 'oldest' ? -newerFirst : newerFirst;
     });
-    sorted.forEach(function(c){ cardsWrap.appendChild(c); });
-  });
+    var frag = document.createDocumentFragment();
+    sorted.forEach(function(c){ frag.appendChild(c); });
+    cardsWrap.appendChild(frag);
+  }
+  sortSelect.addEventListener('change', applySort);
 })();
 </script>
 
