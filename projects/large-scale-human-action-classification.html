@@ -36,26 +36,50 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Before a public dataset goes out on AI-HUB, someone has to verify it's actually learnable. This project validated a 2-/3-person action classification dataset by training models on it and confirming the labels held up.</p>
-    <p>I trained on a 1.2TB video dataset across 8 GPUs (4× A100, 4× V100), reaching mAP of 80.64% for 2-person actions and 84.69% for 3-person actions, then Dockerized the inference pipeline for official TTA validation.</p>
+    <p>Before a public dataset goes out on AI-HUB, someone has to verify it's actually learnable. This project validated a 2-/3-person action classification dataset by training YOWO (You Only Watch Once) models on it and confirming the labels held up.</p>
+    <p>I trained on a 1.2TB video dataset across 8 GPUs (4× A100, 4× V100) using PyTorch DistributedDataParallel so every GPU stayed fully utilized instead of idling between batches, reaching mAP of 80.64% for 2-person actions and 84.65% for 3-person actions, then Dockerized the inference pipeline for official TTA validation.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Architecture — YOWO</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/human-action/arch-yowo-model.png" alt="YOWO architecture: 3D CNN branch for spatiotemporal information and 2D CNN branch for spatial information, fused through a channel fusion and attention module into classification and bounding box regression">
+        <span class="proof-caption">YOWO — a 3D CNN reads spatiotemporal motion across the input clip while a 2D CNN reads spatial detail from the key frame, fused into a single classification + bounding box output</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Multi-GPU training</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/human-action/result-multi-gpu-ddp-utilization.png" alt="nvidia-smi and system monitor showing all 4 Tesla V100 GPUs at 100% utilization during distributed training">
+        <span class="proof-caption">All 4 GPUs (of 8 total, across 2 nodes) pinned at 100% utilization under DistributedDataParallel, no idle time waiting on a lagging worker</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">On a 1.2TB dataset, a single slow data-loading or gradient-sync step compounds fast across epochs. Getting DDP configured so all 8 GPUs stayed saturated, rather than bottlenecking on one, was what made training at this scale actually finish in a reasonable time.</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>mAP 80.64% (2-person)</span><span>mAP 84.69% (3-person)</span></div>
+    <div class="detail-stats"><span>mAP 80.64% (2-person)</span><span>mAP 84.65% (3-person)</span></div>
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
+        <img src="../assets/projects/human-action/result-map-2person-actions.png" alt="Per-class average precision for 2-person actions, ending in mAP 80.64%" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+        <span class="proof-caption">2-person actions — per-class AP across 50 classes, mAP 80.64%</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/4;">
+        <img src="../assets/projects/human-action/result-map-3person-actions.png" alt="Per-class average precision for 3-person actions, ending in mAP 84.65%" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+        <span class="proof-caption">3-person actions — per-class AP across 30 classes, mAP 84.65%</span>
+      </div>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>YOWO</span><span>1.2TB Video Dataset</span><span>8× GPU (A100/V100)</span></div>
+    <div class="detail-stack"><span>YOWO</span><span>PyTorch DDP</span><span>1.2TB Video Dataset</span><span>8× GPU (A100/V100)</span><span>Docker</span></div>
   </div>
-
-  <div class="section-block">
-    <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Action classification confusion matrix<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Multi-GPU training throughput<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
-  </div>
-  
 
 </div>
 
