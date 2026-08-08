@@ -37,13 +37,13 @@
   <!-- Demo video -->
   <div class="section-block">
     <div class="proof-grid">
-      <div class="proof-tile proof-tile--video proof-tile--full" style="max-width:260px; margin:0 auto;">
+      <div class="proof-tile proof-tile--video proof-tile--full" style="max-width:340px; margin:0 auto;">
         <video controls preload="none" playsinline poster="../assets/projects/golf-swing/demo-golf-highlight-output-poster.jpg">
           <source src="../assets/projects/golf-swing/demo-golf-highlight-output.mp4" type="video/mp4">
         </video>
-        <span class="proof-caption">Output — auto-detected Setup-to-Impact windows stitched into a highlight clip, no manual scrubbing</span>
       </div>
     </div>
+    <p style="margin-top:12px; text-align:center; font-size:13px; color:var(--muted); max-width:340px; margin-left:auto; margin-right:auto;">Output — auto-detected Setup-to-Impact windows stitched into a highlight clip, no manual scrubbing</p>
   </div>
 
   <div class="section-block">
@@ -112,12 +112,12 @@
   <div class="section-block">
     <h2>Serving the model</h2>
     <div class="proof-grid">
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/2;">
-        <img src="../assets/projects/golf-swing/result-aws-gpu-instance-selection.png" alt="AWS instance type selection screen, inf1.6xlarge highlighted for GPU inference" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/golf-swing/result-aws-gpu-instance-selection.png" alt="AWS instance type selection screen, inf1.6xlarge highlighted for GPU inference">
         <span class="proof-caption">Rented a GPU inference-optimized instance on AWS to host the model</span>
       </div>
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/2;">
-        <img src="../assets/projects/golf-swing/result-fastapi-server-running.png" alt="Terminal showing a FastAPI server started with uvicorn on the rented AWS instance" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/golf-swing/result-fastapi-server-running.png" alt="Terminal showing a FastAPI server started with uvicorn on the rented AWS instance">
         <span class="proof-caption">Served as a FastAPI application on top of it</span>
       </div>
     </div>
