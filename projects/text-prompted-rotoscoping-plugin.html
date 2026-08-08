@@ -26,43 +26,73 @@
 <div class="detail-hero">
   <a class="back-link" href="../index.html#work">&larr; Back to all work</a>
   <div class="detail-block">
-    <div class="detail-tag">Computer Vision · Ellexi</div>
+    <div class="detail-tag">Computer Vision · Ellexi · with MediaCan</div>
     <h1>Text-Prompted Rotoscoping Plugin</h1>
-    <div class="detail-meta"><span><b>Ellexi · May – Jul 2023 · with MediaCan</b></span></div>
+    <div class="detail-meta"><span><b>Ellexi · May – Jul 2023</b></span></div>
   </div>
 </div>
 
 <div class="detail-body">
 
+  <!-- Demo video: top visual hook -->
+  <div class="section-block">
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--video proof-tile--full">
+        <video controls preload="none" playsinline poster="../assets/projects/rotoscoping/demo-rotoscoping-automation-poster.jpg">
+          <source src="../assets/projects/rotoscoping/demo-rotoscoping-automation.mp4" type="video/mp4">
+        </video>
+        <span class="proof-caption">Demo — a text prompt inside Nuke generates a rotoscoping mask automatically</span>
+      </div>
+    </div>
+  </div>
+
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Rotoscoping — manually tracing an object frame by frame — is one of the most labor-intensive tasks in video post-production. For client MediaCan, I built a FastSAM-based FastAPI server and packaged it as a plugin for Nuke, the industry-standard compositing software.</p>
-    <p>The plugin turns a plain text prompt into a Bézier-curve rotoscoping mask automatically, cutting out the manual frame-by-frame tracing entirely for the objects it targets.</p>
+    <p>Rotoscoping is the process of tracing an object frame by frame to isolate it from the rest of a video, the kind of work compositors rely on to pull out a person, vehicle, or product for VFX and editing. Done by hand, it's one of the slowest, most repetitive tasks in video post-production. A single shot can take hours of manually placing and adjusting spline points on every frame.</p>
+    <p>For client MediaCan, I built a FastSAM-based FastAPI inference server and packaged it as a plugin for Nuke, the industry-standard compositing software. A compositor types a plain-language prompt describing the object (for example, "black dog"), and the plugin returns a Bézier-curve mask generated directly inside Nuke, replacing the manual tracing step entirely for the objects it targets.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>What rotoscoping looks like by hand</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/rotoscoping/example-manual-rotoscoping.png" alt="Manual rotoscoping in a compositing tool, red mask traced frame by frame over a horse and rider" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">Manual rotoscoping — every shape hand-traced and keyframed across the timeline</span>
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/rotoscoping/example-alpha-matte-rotoscoping.jpg" alt="Rotoscoped alpha matte isolating a runner from the background" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        <span class="proof-caption">The end goal — a clean matte that isolates a subject from its background</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Architecture</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/rotoscoping/arch-fastsam-inference-pipeline.png" alt="Architecture: Nuke client sends image and prompt to an inference server running FastSAM">
+        <span class="proof-caption">Nuke sends the frame and text prompt to the inference server, which returns segmentation coordinates back into the compositing scene</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/rotoscoping/example-sam-segmentation.jpg" alt="Segment Anything Model output, every object in a street scene automatically outlined and colored">
+        <span class="proof-caption">What SAM-family models do — segment every object in a frame into a distinct region, which the plugin narrows down to just the one matching the prompt</span>
+      </div>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>Text → mask, directly</span></div>
+    <div class="detail-stats">
+      <span>Text → mask, directly in Nuke</span>
+      <span>FastSAM: 40ms/img vs SAM: 2099ms/img</span>
+    </div>
+    <p style="margin-top:14px;">FastSAM was chosen over the original SAM specifically for this gap: at roughly 50× the speed, it keeps prompt-to-mask generation fast enough to fit inside a compositor's normal workflow instead of becoming its own coffee-break wait.</p>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
     <div class="detail-stack"><span>FastSAM</span><span>FastAPI</span><span>Nuke Plugin</span></div>
   </div>
-
-  <div class="section-block">
-    <h2>Proof of work</h2>
-    <div class="proof-grid">
-      <div class="proof-tile proof-tile--video proof-tile--full">
-        <video controls preload="metadata">
-          <source src="../assets/projects/rotoscoping/demo-rotoscoping-automation.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Plugin UI inside Nuke<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div>
-      <div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Text prompt → generated mask example<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div>
-    </div>
-  </div>
-  
 
 </div>
 
