@@ -37,7 +37,7 @@
   <!-- Demo video -->
   <div class="section-block">
     <div class="proof-grid">
-      <div class="proof-tile proof-tile--video proof-tile--full">
+      <div class="proof-tile proof-tile--video proof-tile--full" style="max-width:260px; margin:0 auto;">
         <video controls preload="none" playsinline poster="../assets/projects/golf-swing/demo-golf-highlight-output-poster.jpg">
           <source src="../assets/projects/golf-swing/demo-golf-highlight-output.mp4" type="video/mp4">
         </video>
@@ -56,15 +56,15 @@
     <h2>Dataset — AI-HUB golf swing data</h2>
     <div class="proof-grid">
       <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/golf-swing/diagram-swing-phase-names.jpg" alt="Eight photos showing each named golf swing phase: Setup, Address, Takeback, Backswing, Backswingtop, Downswing, Impact, Follow">
+        <span class="proof-caption">The named swing phases the dataset labels frame by frame</span>
+      </div>
+      <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/golf-swing/dataset-ai-hub-golf-listing.png" alt="AI-HUB dataset listing: Sports Person Action (Golf), 1.99TB, noting automatic highlight generation as a use case">
         <span class="proof-caption">AI-HUB's "Sports Person Action (Golf)" dataset (1.99TB) — automatic highlight generation from player movement is listed as one of its intended uses</span>
       </div>
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/2;">
-        <img src="../assets/projects/golf-swing/diagram-swing-phase-names.jpg" alt="Eight photos showing each named golf swing phase: Setup, Address, Takeback, Backswing, Backswingtop, Downswing, Impact, Follow" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        <span class="proof-caption">The named swing phases the dataset labels frame by frame</span>
-      </div>
-      <div class="proof-tile proof-tile--img" style="aspect-ratio:3/2;">
-        <img src="../assets/projects/golf-swing/dataset-phase-labels-json.png" alt="Label schema listing swing phase classes: Setup, Adress, Takeback, Backswing, Backswingtop, Downswing, Impact, Follow, Finish, Putt" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/golf-swing/dataset-phase-labels-json.png" alt="Label schema listing swing phase classes: Setup, Adress, Takeback, Backswing, Backswingtop, Downswing, Impact, Follow, Finish, Putt">
         <span class="proof-caption">Label schema — 10 phase classes from Setup through Putt</span>
       </div>
     </div>
@@ -75,18 +75,38 @@
     <div class="proof-grid">
       <div class="proof-tile proof-tile--img proof-tile--full">
         <img src="../assets/projects/golf-swing/diagram-key-frame-temporal-window.png" alt="Diagram of a temporal window of frames feeding into a key frame for action classification">
-        <span class="proof-caption">Action classification reads a short window of frames leading up to a key frame, not just a single static image</span>
-      </div>
-      <div class="proof-tile proof-tile--img proof-tile--full">
-        <img src="../assets/projects/golf-swing/research-yowo-action-detection-example.png" alt="YOWO detecting various actions with confidence scores, including a golf swing detected at 0.985 confidence">
-        <span class="proof-caption">The underlying action-detection model, here correctly localizing a golf swing at 0.985 confidence alongside other action classes</span>
-      </div>
-      <div class="proof-tile proof-tile--img proof-tile--full">
-        <img src="../assets/projects/golf-swing/diagram-amplitude-peak-split.png" alt="Audio waveform amplitude plot with sharp peaks marking candidate club-to-ball impact moments">
-        <span class="proof-caption">The secondary signal — amplitude peaks in the audio track flag candidate impact moments that the video classifier can miss</span>
+        <span class="proof-caption">A single static frame is context-blind: is this person sitting down or standing up? You can't tell from one image. Video classification reads the window of frames leading up to the key frame so the model has motion context, not just a snapshot.</span>
       </div>
     </div>
-    <p style="margin-top:14px;">The action classifier does the primary work of labeling swing phases; the amplitude-peak check is a lightweight backstop, not a full second model, so it adds almost no latency to the pipeline while catching cases where the visual signal alone is ambiguous.</p>
+    <p style="margin-top:14px;">The same ambiguity shows up in a golf swing. A single frame can look like address, the top of the backswing, or the finish depending on the angle, and a model scoring frames independently will confuse them. YOWO reads the short clip leading into each key frame so it's classifying motion, not a pose.</p>
+    <div class="proof-grid" style="margin-top:20px; grid-template-columns:repeat(3,1fr);">
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-biking.gif" alt="YOWO detecting a biking action" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-fencing.gif" alt="YOWO detecting fencing actions" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-golfswing.gif" alt="YOWO detecting a golf swing at 0.985 confidence" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-catch.gif" alt="YOWO detecting a catch action" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-brush-hair.gif" alt="YOWO detecting a hair-brushing action" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+      <div class="proof-tile proof-tile--img" style="aspect-ratio:4/3;">
+        <img src="../assets/projects/golf-swing/demo-yowo-action-pullup.gif" alt="YOWO detecting a pull-up action" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:var(--muted);">The underlying action-detection model (YOWO) across a range of action classes, correctly localizing a golf swing at 0.985 confidence alongside biking, fencing, catch, brush_hair, and pullup.</p>
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/golf-swing/diagram-amplitude-peak-split.png" alt="Audio waveform amplitude plot with sharp peaks marking candidate club-to-ball impact moments">
+        <span class="proof-caption">The secondary signal — amplitude peaks in the audio track flag candidate impact moments the video classifier can miss</span>
+      </div>
+    </div>
+    <p style="margin-top:14px;">The action classifier does the primary work of labeling swing phases. The amplitude-peak check is a lightweight backstop: around each peak, a heuristic 2-seconds-before to 1-second-after window is searched for the actual impact frame, rather than running a full second model.</p>
   </div>
 
   <div class="section-block">
