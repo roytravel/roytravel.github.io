@@ -41,8 +41,58 @@
   </div>
 
   <div class="section-block">
+    <h2>One signal, 30 biomarkers</h2>
+    <p>Rather than predicting a single disease label, the model extracts 30 continuous clinical values, from HbA1c and eGFR to K+ and NT-proBNP, simultaneously from one 30-second wearable ECG.</p>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/diagram-30-biomarkers-from-ecg.jpg" alt="Diagram showing a wearable ECG signal branching into 30 predicted lab biomarkers, from HbA1c and eGFR to NT-proBNP and CRP">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">A single non-invasive ECG stream standing in for a 30-value blood panel</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Clinical scope</h2>
+    <p>Those 30 biomarkers roll up into 9 clinical domains, each flagged from its own biomarker cluster.</p>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/diagram-9-disease-domains.jpg" alt="Wheel diagram showing 9 clinical domains screened from ECG: glycemic, liver, metabolic, kidney, oxygen delivery, electrolyte, cardiac, coagulation, and immune and inflammation, each with its biomarker cluster">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Glycemic, liver, metabolic, kidney, oxygen delivery, electrolyte, cardiac, coagulation, and immune &amp; inflammation, all from one neural network pass</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Lead-agnostic by design</h2>
+    <p>Hospital ECGs use a standard 12-lead setup. A smartwatch or other wearable records only a single lead. A model trained on 12-lead data alone would likely break the moment it saw a 1-lead signal in the real world.</p>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/diagram-random-lead-selection.jpg" alt="Diagram of random lead selection training: standard 12-lead ECG and wearable 1-lead device both feeding into the same ECG AI model">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Random lead selection during training forces the model to learn signal features that hold up regardless of how many leads it's given</p>
+  </div>
+
+  <div class="section-block">
+    <h2>1-lead to 12-lead reconstruction</h2>
+    <p>For cases where only a single wearable lead is available, a second model generates the missing 11 leads before handing the reconstructed 12-lead tensor to the biomarker prediction pipeline. Training and inference on the reconstructed signal outperformed running the raw 1-lead signal alone.</p>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/diagram-lead-reconstruction.jpg" alt="Diagram of a reconstruction model generating the missing 11 ECG leads from a single wearable lead, producing a full 12-lead tensor for the biomarker pipeline">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">A generative model synthesizes the missing 11 leads from a single wearable channel before biomarker prediction runs</p>
+  </div>
+
+  <div class="section-block">
     <h2>Results</h2>
     <div class="detail-stats"><span>10 clinical conditions</span><span>AUROC / Sens / Spec > 0.80</span></div>
+    <div class="proof-grid" style="margin-top:16px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/multi-disease-screening/result-performance-metrics.jpg" alt="Performance dashboard showing AUROC above 0.80, sensitivity and specificity in the 0.70-0.80+ range, NPV above 0.97, and the corresponding ROC curve">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Internal validation: AUROC and NPV consistently high, framing this as a high-sensitivity rule-out tool rather than a stand-alone diagnosis</p>
   </div>
 
   <div class="section-block">
