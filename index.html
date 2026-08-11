@@ -87,9 +87,9 @@
           <div class="card-period">Jan 2026 – Feb 2026</div>
         </div>
         <h3>Tachycardia-Bradycardia Syndrome (TBS) Detection</h3>
-        <p class="desc">Digitized scanned Holter reports via OCR, then labeled tachycardia episodes while excluding confounding diagnoses via clinical rule-based filtering.</p>
-        <div class="stats"><span>OCR Pipeline</span><span>Clinical Labeling</span></div>
-        <div class="stack"><span class="chip">Tesseract OCR</span><span class="chip">Holter ECG</span></div>
+        <p class="desc">Built a pipeline to flag patients whose tachycardia masks a co-occurring bradycardia, crawling and OCR'ing scanned Holter reports to build a labeled dataset from ~300 confirmed cases.</p>
+        <div class="stats"><span>~300 confirmed TBS patients</span><span>Dual-pass labeling</span></div>
+        <div class="stack"><span class="chip">Tesseract OCR</span><span class="chip">LLM Extraction</span></div>
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
 
@@ -114,7 +114,7 @@
         </div>
         <h3>14-Day Arrhythmia Forecasting (27 Types)</h3>
         <p class="desc">Pre-trained and fine-tuned 12-lead ECG foundation models to forecast arrhythmia onset 14 days out, with survival-analysis-based false-positive tracking.</p>
-        <div class="stats"><span>AUROC 0.81 (AFib)</span><span>0.77 (27 types)</span></div>
+        <div class="stats"><span>AUROC 0.909 (AFib)</span><span>0.798 (CIA)</span></div>
         <div class="stack"><span class="chip">12-lead ECG</span><span class="chip">Survival Analysis</span></div>
         <span class="card-link">View details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span>
       </a>
