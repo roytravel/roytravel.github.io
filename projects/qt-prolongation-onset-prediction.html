@@ -36,26 +36,81 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Long QT Syndrome is dangerous precisely because it's silent until it isn't. A prolonged QT interval can trigger a fatal arrhythmia with little warning. This project built a short-term risk model that flags onset 1, 2, or 3 days ahead directly from ECG signals.</p>
-    <p>Raw signals were filtered using QTc and heart-rate thresholds, automated-reading-based diagnosis confirmation, and confounder removal, before training. I benchmarked a standard ResNet against a Quantum CNN architecture on the same task, and tuned the final model deliberately as a high-sensitivity rule-out tool — its job is to make sure nothing dangerous slips through, not to make a final diagnosis on its own.</p>
+    <p>Bedside 12-lead monitors already catch QT prolongation once it happens, but they alarm on raw threshold crossings, and that produces enough false positives that physicians start tuning them out. The actual clinical need is different: flag which patients with a currently normal-looking ECG are likely to develop QT prolongation in the next 1, 2, or 3 days, before it becomes an emergency. One hospital had already asked to pilot exactly this kind of early-warning model.</p>
+    <p>I trained a ResNet on 12-lead ECG for the task and benchmarked it against a Quantum CNN (QCNN) to see whether a quantum architecture actually earns its added complexity here. It mostly doesn't: the two land within a point or two of AUROC across every window. The more useful result came from testing on a single lead. A wearable only records lead I, and a model trained on lead I alone tracked the full 12-lead model closely, which meant the same early-warning signal could work on consumer hardware, not just hospital equipment.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Building a clean dataset</h2>
+    <p>The first filter set the baseline: I kept only ECGs with a corrected QT interval under sex-specific thresholds (450ms for men, 470ms for women) and a resting heart rate between 60 and 90 bpm, so "normal" actually meant normal. From there, I cross-referenced each record's automated ECG reading text and kept only cases with a confirmed QT prolongation diagnosis, rather than trusting a single borderline QTc value on its own.</p>
+    <p>The harder part was removing confounders that make a QT interval look prolonged, or mask a real prolongation, for reasons that have nothing to do with the condition itself: QT-prolonging medications, electrolyte imbalances like hypokalemia and hypomagnesemia, bundle branch block and other wide-QRS rhythms that make QT measurement unreliable, paced rhythms, atrial fibrillation, and known congenital Long QT Syndrome cases. Each purification pass traded dataset size for label trust, and it paid off in the final numbers.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Lead I carries the signal</h2>
+    <p>QT interval is fundamentally a timing measurement, the span from the start of the Q wave to the end of the T wave. That doesn't require comparing waveform shape across 12 different vantage points around the heart, it just requires resolving two points in time accurately, and lead I already does that on its own. The other 11 leads mostly add spatial and morphological detail, useful for tasks like infarct localization but far less useful here. A model reconstructing the missing 11 leads from lead I alone closed most of the remaining gap to full 12-lead performance, without ever needing a real 12-lead capture.</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>AUROC 0.85</span><span>NPV 0.99</span><span>1–3 day horizon</span></div>
+    <div class="detail-stats"><span>600K+ 12-lead ECGs (EUMC)</span><span>Best AUROC 0.868 (2-day, 12L QCNN)</span><span>NPV up to 99%</span><span>1-lead capable</span></div>
+    <p style="margin:16px 0 10px; font-size:13.5px; color:var(--muted);">Test-set performance by prediction window and model, all at the Youden-optimal cutoff.</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:20px 0 10px;">1-day window</h3>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Model</th><th>AUROC</th><th>AUPRC</th><th>Sens</th><th>Spec</th><th>PPV</th><th>NPV</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>12L ResNet</td><td>0.847</td><td>0.210</td><td>0.78</td><td>0.78</td><td>0.15</td><td>0.99</td></tr>
+          <tr><td>12L QCNN</td><td>0.850</td><td>0.199</td><td>0.85</td><td>0.72</td><td>0.13</td><td>0.99</td></tr>
+          <tr><td>Lead-I ResNet</td><td>0.831</td><td>0.204</td><td>0.78</td><td>0.75</td><td>0.14</td><td>0.99</td></tr>
+          <tr><td>Lead-I QCNN</td><td>0.816</td><td>0.174</td><td>0.78</td><td>0.72</td><td>0.12</td><td>0.99</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">2-day window</h3>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Model</th><th>AUROC</th><th>AUPRC</th><th>Sens</th><th>Spec</th><th>PPV</th><th>NPV</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>12L ResNet</td><td>0.863</td><td>0.341</td><td>0.82</td><td>0.76</td><td>0.20</td><td>0.98</td></tr>
+          <tr><td>12L QCNN</td><td>0.868</td><td>0.333</td><td>0.88</td><td>0.70</td><td>0.17</td><td>0.99</td></tr>
+          <tr><td>Lead-I ResNet</td><td>0.823</td><td>0.254</td><td>0.79</td><td>0.72</td><td>0.17</td><td>0.98</td></tr>
+          <tr><td>Lead-I QCNN</td><td>0.829</td><td>0.259</td><td>0.83</td><td>0.69</td><td>0.16</td><td>0.98</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">3-day window</h3>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Model</th><th>AUROC</th><th>AUPRC</th><th>Sens</th><th>Spec</th><th>PPV</th><th>NPV</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>12L ResNet</td><td>0.851</td><td>0.302</td><td>0.86</td><td>0.70</td><td>0.20</td><td>0.98</td></tr>
+          <tr><td>12L QCNN</td><td>0.844</td><td>0.299</td><td>0.80</td><td>0.76</td><td>0.22</td><td>0.98</td></tr>
+          <tr><td>Lead-I ResNet</td><td>0.823</td><td>0.274</td><td>0.80</td><td>0.70</td><td>0.19</td><td>0.98</td></tr>
+          <tr><td>Lead-I QCNN</td><td>0.816</td><td>0.280</td><td>0.84</td><td>0.65</td><td>0.17</td><td>0.98</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>ECG Signal Processing</span><span>ResNet</span><span>Quantum CNN</span></div>
+    <div class="detail-stack"><span>ECG Signal Processing</span><span>ResNet</span><span>Quantum CNN</span><span>Lead Reconstruction</span><span>Clinical Cohort Filtering</span></div>
   </div>
 
   <div class="section-block">
-    <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Preprocessing & filtering pipeline diagram<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>ResNet vs. Quantum CNN performance comparison<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
+    <h2>Future work</h2>
+    <p>External validation is the piece I never got to. The plan was to test the model against HEEDB (Harvard-Emory ECG Database) and MIMIC to see how it held up outside the EUMC cohort it was trained on, but I left the company before that validation ran.</p>
   </div>
-  
 
 </div>
 
