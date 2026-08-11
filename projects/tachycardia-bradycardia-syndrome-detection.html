@@ -36,26 +36,60 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Most Holter monitor reports exist only as scanned PDFs — unusable for model training as-is. The first step here was making that data usable: digitizing scanned Holter analysis reports with Tesseract OCR and extracting key-value pairs into structured JSON.</p>
-    <p>From there, I built a clinical labeling pipeline that flags tachycardia episodes from ECG signals using a max RR-interval threshold, while explicitly excluding confounding diagnoses like Sick Sinus Syndrome and Complete AV Block through ICD-code-based filtering. That kind of clinical nuance is what keeps a dataset trustworthy.</p>
+    <p>Tachycardia and bradycardia sound like opposites, but the same patient can have both. Someone shows up with tachycardia, gets started on rate-control medication for it, and that's where Tachycardia-Bradycardia Syndrome (TBS) turns dangerous: the drug treats the fast rhythm but also suppresses the heart's backup pacing, and the patient can develop a multi-second sinus pause. This project built a pipeline to catch that combined pattern before treatment starts, not after a pause already happened.</p>
+    <p>The hard part wasn't modeling, it was finding enough confirmed cases to model from. The clearest signal for TBS sits in Holter monitor reports, and those only exist as scanned PDFs on a vendor portal. I built a crawler to pull them at scale, ran them through Tesseract OCR, and used an LLM to turn the raw extracted text into structured, trainable data.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>A narrow funnel</h2>
+    <p>Out of roughly 600,000 patients in the EUMC ECG dataset, only about 10,000 had a matching Holter recording on file, and of those, only around 300 carried a confirmed TBS diagnosis. Every stage of this project had to work around that scarcity. With a labeled set that small, every label has to be trustworthy, because there's no room to average out noisy ones.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>Two passes on labeling</h2>
+    <p>The first labeling pass pulled patients already coded as TBS in the EMR. That caught the clear-cut cases, but missed the ones where a physician's note described the same pattern in more abstract language instead of the exact diagnosis code. The second pass closed that gap by parsing Holter PDF reports and raw Holter signal data directly, filtering for a tachycardia episode immediately followed by an RR interval of 3 seconds or more, the same clinical signature as a dangerous pause. A physician and I then labeled the resulting cohort independently, since a false negative here means missing a patient who's actually at risk.</p>
+  </div>
+
+  <div class="section-block">
+    <h2>From scanned PDF to trainable data</h2>
+    <p>Holter analysis reports only existed as scanned PDFs sitting on a vendor portal, so step one was crawling that portal at scale. Each PDF then went through Tesseract OCR to pull out raw text, and an LLM converted that text into structured key-value JSON covering patient info, heart rate stats, and arrhythmia summaries. Those structured records were compiled into a clean dataset for training and analysis.</p>
+    <p style="margin:16px 0 10px; font-size:13.5px; color:var(--muted);">Screenshots from the actual pipeline. Patient names, dates of birth, and hospital identifiers are redacted with black boxes.</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin-bottom:10px;">1. Scanned PDF → OCR → structured JSON</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/tachycardia-bradycardia-syndrome-detection/result-pdf-to-json-extraction.png" alt="Holter PDF report next to its Tesseract OCR + LLM extracted structured JSON output, with patient identifiers redacted">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">The left pane is the original scanned report, the right pane is the structured JSON an LLM produced from the raw OCR text</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">2. OCR field detection</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/tachycardia-bradycardia-syndrome-detection/result-ocr-bounding-boxes.png" alt="OCR bounding-box visualization over a Holter report, showing each field Tesseract detected before LLM extraction, with patient identifiers redacted">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Bounding boxes over each detected field, used to validate OCR accuracy before trusting the extraction at scale</p>
+
+    <h3 style="font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; color:var(--ink); margin:24px 0 10px;">3. Structured Holter dataset</h3>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/tachycardia-bradycardia-syndrome-detection/result-holter-dataset-csv.png" alt="Structured CSV dataset compiled from OCR-extracted Holter reports, with patient code, date of birth, measurement code, and device serial number columns redacted">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">The final tabular dataset, ready for the labeling and modeling pipeline</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>OCR → Structured JSON</span><span>Clinical Rule-Based Labeling</span></div>
+    <div class="detail-stats"><span>~600K ECG cohort (EUMC)</span><span>~10K matched Holter recordings</span><span>~300 confirmed TBS patients</span><span>Dual physician + engineer labeling</span></div>
+    <p style="margin-top:14px;">Training a ResNet classifier on top of this dataset was the intended next step. The clear-cut cases were labeled, but the ambiguous EMR cases were waiting on a physician's review, and that review hadn't wrapped up by the time I left the company.</p>
   </div>
 
   <div class="section-block">
     <h2>Stack</h2>
-    <div class="detail-stack"><span>Tesseract OCR</span><span>Holter ECG</span><span>ICD Coding</span></div>
+    <div class="detail-stack"><span>Web Crawling</span><span>Tesseract OCR</span><span>LLM Extraction</span><span>Holter Signal Analysis</span><span>EMR / ICD Filtering</span></div>
   </div>
-
-  <div class="section-block">
-    <h2>Proof of work</h2>
-    <p style="margin-bottom:16px;">This was a company project without a public repo, so here's visual evidence in place of code — swap these placeholders for real screenshots or diagrams.</p>
-    <div class="proof-grid"><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Sample OCR extraction (PDF → JSON)<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div><div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Labeling rule logic diagram<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div></div>
-  </div>
-  
 
 </div>
 
