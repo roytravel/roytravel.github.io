@@ -36,13 +36,58 @@
 
   <div class="section-block">
     <h2>Overview</h2>
-    <p>Rather than detecting arrhythmia after the fact, this project aimed earlier: pre-training and fine-tuning 12-lead ECG foundation models to forecast onset up to 14 days before it happens, across 27 arrhythmia subtypes including atrial fibrillation.</p>
+    <p>Rather than detecting arrhythmia after the fact, this project aimed earlier: pre-training and fine-tuning 12-lead ECG foundation models to forecast onset up to 14 days out, across 27 arrhythmia subtypes. Those subtypes roll up into two forecasting targets: Atrial Fibrillation (AFib) and Clinically Important Arrhythmia (CIA), a broader category spanning atrial arrhythmia, ventricular fibrillation, and bundle branch block. AFib technically falls inside CIA's atrial arrhythmia group, but it's common enough on its own that it gets forecast as its own target instead of being folded into the aggregate.</p>
     <p>Getting clean signal in meant writing custom XML parsers for medical-device integration, and getting a trustworthy result out meant tracking false positives across patient subgroups using survival analysis — a forecasting model is only as useful as its false-alarm rate is low.</p>
   </div>
 
   <div class="section-block">
     <h2>Results</h2>
-    <div class="detail-stats"><span>AUROC 0.81 (AFib)</span><span>0.77 (27 subtypes)</span></div>
+    <div class="detail-stats"><span>AUROC 0.909 (AFib, 14-day)</span><span>AUROC 0.798 (CIA, 14-day)</span><span>Lead-I capable</span></div>
+    <p style="margin:16px 0 10px; font-size:13.5px; color:var(--muted);">Operational test performance, 14-day forecast horizon.</p>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr><th>Target</th><th>Input</th><th>AUROC</th><th>AUPRC</th><th>Sens</th><th>Spec</th><th>N</th><th>Prevalence</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AFib (14-day)</td><td>12-lead</td><td>0.909</td><td>0.364</td><td>0.917</td><td>0.791</td><td>2,493</td><td>0.029</td></tr>
+          <tr><td>AFib (14-day)</td><td>Lead I</td><td>0.832</td><td>0.239</td><td>0.847</td><td>0.704</td><td>2,493</td><td>0.029</td></tr>
+          <tr><td>CIA (14-day)</td><td>12-lead</td><td>0.798</td><td>0.389</td><td>0.728</td><td>0.778</td><td>2,493</td><td>0.103</td></tr>
+          <tr><td>CIA (14-day)</td><td>Lead I</td><td>0.762</td><td>0.316</td><td>0.693</td><td>0.733</td><td>2,493</td><td>0.103</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Rethinking "false positives"</h2>
+    <div class="proof-grid">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/arrhythmia-forecasting/diagram-case-study-overview.png" alt="Case study overview: AFib and CIA prediction, survival analysis, and rethinking false positives in a 14-day arrhythmia forecasting model">
+      </div>
+    </div>
+    <p style="margin-top:14px;">A model that flags a patient as high risk within 14 days, and then sees nothing happen by day 14, looks like it made an error. That framing misses what a forecasting model is actually doing: predicting elevated risk, not a fixed appointment. Extending follow-up to 6 months told a different story.</p>
+
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/arrhythmia-forecasting/diagram-false-positive-dilemma.png" alt="470 patients flagged high-risk showed no arrhythmia event by day 14 and remained in normal sinus rhythm, the false positive dilemma">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">470 patients were flagged high risk but showed no event by day 14. Under a strict binary read, that's 470 false positives.</p>
+
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/arrhythmia-forecasting/diagram-14-day-survival-analysis.png" alt="Kaplan-Meier survival curves comparing high-risk cohort (n=1,367) against low-risk cohort (n=4,015) over the 14-day window, log-rank p less than 0.001">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Kaplan-Meier curves within the 14-day window: the high-risk group's event-free survival drops far faster than the low-risk group's (log-rank p &lt; 0.001), confirming the risk score is doing real separation even before day 14</p>
+
+    <div class="proof-grid" style="margin-top:20px;">
+      <div class="proof-tile proof-tile--img proof-tile--full">
+        <img src="../assets/projects/arrhythmia-forecasting/diagram-6-month-outcome-tracking.png" alt="Cumulative incidence chart tracking the false-positive cohort out to 6 months, reaching 21.9% by day 30 and 63.2% by day 180">
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--muted);">Tracking that same "false positive" cohort out to 6 months: 63.2% went on to have a confirmed clinical event anyway. Most of the 14-day "errors" weren't errors, they were just early. That's the argument for evaluating a forecasting model on survival curves instead of a single-point confusion matrix.</p>
   </div>
 
   <div class="section-block">
@@ -57,10 +102,8 @@
         <img src="../assets/projects/arrhythmia-forecasting/arch-arrhythmia-prediction-research.png" alt="Arrhythmia forecasting model architecture">
         <span class="proof-caption">Model architecture &amp; pretraining setup</span>
       </div>
-      <div class="proof-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Subgroup false-positive tracking chart<br><span style="font-weight:400;opacity:.8;">— add screenshot here —</span></span></div>
     </div>
   </div>
-  
 
 </div>
 
